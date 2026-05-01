@@ -1,0 +1,123 @@
+.promoblock {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+.promoblock_img {
+  width: 100%;
+  height: 620px;
+  overflow: hidden;
+}
+
+.promoblock_img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.linear-gradient {
+  position: absolute;
+  z-index: 10;
+
+  background: linear-gradient(270deg, rgba(0, 0, 0, 0) 26.25%, #000000 55.38%);
+
+  width: 100%;
+  height: 100%;
+}
+
+.promoblock_arrow {
+  display: none;
+}
+
+h1 {
+  position: relative;
+  z-index: 20;
+  top: 200px;
+  left: 180px;
+
+  font-family: "Inter";
+  font-weight: 900;
+  font-size: 70px;
+  line-height: 97px;
+
+  color: #ffffff;
+}
+
+@media (max-width: 1200px) {
+  h1 {
+    top: 200px;
+    left: 140px;
+
+    font-size: 60px;
+    line-height: 77px;
+
+    color: #ffffff;
+  }
+
+  .promoblock_img {
+    width: 150%;
+    height: 520px;
+    overflow: hidden;
+  }
+
+  .promoblock_img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+@media (max-width: 900px) {
+  .promoblock {
+    height: 80vh;
+    min-height: 615px;
+    max-height: 815px;
+    overflow: hidden;
+  }
+
+  .promoblock_img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .promoblock_img img {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .linear-gradient {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 52.68%,
+      rgba(0, 0, 0, 0) 67.11%,
+      #000000 82.02%
+    );
+  }
+
+  h1 {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    line-height: 1.3;
+    text-align: center;
+    width: 90%;
+    margin: 0;
+    z-index: 20;
+  }
+
+  .promoblock_arrow {
+    display: block;
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

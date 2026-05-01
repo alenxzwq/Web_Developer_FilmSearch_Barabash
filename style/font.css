@@ -3,3 +3,9 @@
   src: url(/assets/fonts/Inter-SemiBold.otf);
   font-weight: 600;
 }
+
+@font-face {
+  font-family: "Inter";
+  src: url(/assets/fonts/Inter-Black.otf);
+  font-weight: 900;
+}
