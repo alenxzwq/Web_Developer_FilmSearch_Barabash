@@ -1,0 +1,174 @@
+/* Reset CSS — обнуление стилей */
+
+/* Убираем внешние и внутренние отступы у всех элементов */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Убираем маркировку у списков */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Убираем подчёркивание у ссылок */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Убираем рамку у картинок и делаем их блочными */
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Наследуем шрифты для полей ввода, кнопок и текста */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+/* Убираем стандартные стили у кнопок */
+button {
+  cursor: pointer;
+  background-color: transparent;
+}
+
+/* Убираем стандартные стили у таблицы */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Убираем кавычки у цитат */
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
+  content: "";
+}
+
+/* Убираем ползунок у textarea (только для Webkit) */
+textarea {
+  resize: vertical;
+}
+
+/* Убираем стрелки у input type number */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Базовая настройка для html и body */
+html,
+body {
+  height: 100%;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  font-family: "Inter";
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1% clamp(1rem, 10%, 15%) 1% clamp(1rem, 10%, 15%);
+
+  background-color: var(--white);
+}
+
+.header_list {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 4vw, 65px);
+  margin-top: 15px;
+  font-size: 20px;
+}
+
+.header_list_point {
+  cursor: pointer;
+}
+
+.switch_theme {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 20px);
+  margin-top: 15px;
+}
+
+.switch_theme_icon {
+  cursor: pointer;
+}
+
+.header_burger {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .header_list {
+    display: none;
+  }
+
+  .switch_theme {
+    display: none;
+  }
+
+  .header_burger {
+    display: block;
+    margin-top: 15px;
+
+    width: 40px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  header {
+    padding-top: 20px;
+  }
+
+  .header_list {
+    display: none;
+  }
+
+  .switch_theme {
+    display: none;
+  }
+
+  .header_burger {
+    display: block;
+    margin-top: 15px;
+
+    width: 35px;
+    height: 25px;
+  }
+
+  .header_logo {
+    width: 217px;
+    height: 45px;
+  }
+}
