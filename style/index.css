@@ -45,6 +45,146 @@ h1 {
   color: #ffffff;
 }
 
+.gallery {
+  position: relative;
+  background-color: var(--white);
+  padding: 100px clamp(1rem, 10%, 15%);
+  max-width: 1600px;
+  margin: 0 auto; /* Центрирование по горизонтали */
+}
+
+.slider_wrapper {
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto; /* Центрируем wrapper */
+}
+
+.slider_track {
+  display: flex;
+  transition: transform 0.5s ease;
+  gap: 100px;
+}
+
+.slider_item {
+  flex-shrink: 0;
+  width: 350px;
+  height: 500px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+
+.slider_item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* .slider_item > div {
+  position: relative;
+  z-index: 2;
+} */
+
+.slider_item_ratting {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  top: 15px;
+  left: 15px;
+  background-color: #3bb33b;
+  border-radius: 2px;
+
+  width: 50px;
+  height: 30px;
+
+  z-index: 3;
+}
+
+.slider_item_ratting p {
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 16.5px;
+
+  color: var(--white);
+}
+
+.slider_item_name {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+
+  z-index: 3;
+
+  width: 100%;
+  height: 222px;
+  left: 0px;
+  bottom: 0px;
+
+  background: linear-gradient(180deg, rgba(1, 1, 1, 0) 11.14%, #010101 28.92%);
+}
+
+.slider_item_name p {
+  font-family: "Inter";
+  font-weight: 600;
+  font-size: 29px;
+  line-height: 36px;
+
+  position: absolute;
+  left: 15px;
+  bottom: 55px;
+  margin-right: 20%;
+
+  color: var(--white);
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.prev-btn {
+  position: absolute;
+  left: 20px; /* Отступ от края галереи */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.next-btn {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.slider-btn img {
+  width: 24px;
+  height: 24px;
+}
+
+@media (min-width: 1900px) {
+  .gallery {
+    max-width: 1900px;
+  }
+}
+
 @media (max-width: 1200px) {
   h1 {
     top: 200px;
@@ -119,5 +259,47 @@ h1 {
     bottom: 5%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  .prev-btn {
+    left: 10px;
+  }
+
+  .next-btn {
+    right: 10px;
+  }
+  .slider-btn img {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery {
+    max-width: 600px;
+  }
+
+  .slider_track {
+    gap: 80px;
+  }
+
+  .slider_item {
+    width: 300px;
+    height: 430px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .prev-btn {
+    left: 5px;
+  }
+
+  .next-btn {
+    right: 5px;
+  }
+  .slider-btn img {
+    width: 30px;
+    height: 30px;
   }
 }
