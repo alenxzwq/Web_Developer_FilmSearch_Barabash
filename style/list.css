@@ -1,0 +1,83 @@
+.sidebar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 440px;
+  min-height: 100vh;
+  background: var(--white);
+
+  display: flex;
+  flex-direction: column;
+  padding: 110px 50px 1200px 90px;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+  z-index: 100;
+
+  overflow-y: visible; /* или просто убрать overflow-y */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar_filters {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.filter_group label {
+  display: block;
+  margin-bottom: 25px;
+  margin-left: 25px;
+  font-size: 14px;
+
+  font-family: "Inter";
+
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 39px;
+
+  color: #000000;
+}
+
+.select_container {
+  position: relative;
+  width: 100%;
+}
+
+.style_select {
+  width: 100%;
+  padding: 22px 22px 22px 22px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border-radius: 10px;
+  background: var(--select-background);
+  color: var(--select-text);
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.styled_select::-ms-expand {
+  display: none;
+}
+
+.select_arrow {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: transform 0.3s ease;
+}
+
+.select_arrow.rotated {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.filter_group select option {
+  background: #1a1a2e;
+}
