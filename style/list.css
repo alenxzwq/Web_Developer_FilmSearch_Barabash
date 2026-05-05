@@ -1,3 +1,125 @@
+/* Основной контейнер */
+.movies_page {
+  display: flex;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+.main-content {
+  flex: 1;
+  padding: 30px 40px;
+  overflow-y: auto;
+}
+
+/* Хедер контента */
+.content_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  margin-top: 110px;
+}
+
+.content_header h1 {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 135%;
+
+  color: #010101;
+}
+
+.search_sort {
+  display: flex;
+  gap: 15px;
+}
+
+.search_input {
+  padding: 12px 20px;
+  background: #1a1a2e;
+  border: 1px solid #2a2a3e;
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+  width: 250px;
+}
+
+.sort_select {
+  padding: 12px 20px;
+  background: #1a1a2e;
+  border: 1px solid #2a2a3e;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Сетка фильмов */
+.movies_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  column-gap: 20px;
+  row-gap: 50px;
+
+  margin-bottom: 150px;
+}
+
+/* Карточка фильма */
+.movie_card {
+  background: #1a1a2e;
+  border-radius: 15px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.movie_card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.movie_card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.movie_info {
+  padding: 15px;
+  position: relative;
+}
+
+.movie_info h3 {
+  color: white;
+  font-size: 16px;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.movie_info p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+}
+
+.movie_rating {
+  position: absolute;
+  top: -20px;
+  right: 15px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 5px 10px;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.slider_list {
+  display: none;
+}
+
 .sidebar {
   position: sticky;
   top: 0;
@@ -136,5 +258,55 @@
     /* or 43px */
 
     color: #000000;
+  }
+}
+
+@media (min-width: 1750px) {
+  .movies_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    column-gap: 20px;
+    row-gap: 50px;
+
+    margin-bottom: 150px;
+  }
+}
+
+@media (max-width: 1500px) {
+  .movies_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    column-gap: 20px;
+    row-gap: 50px;
+
+    margin-bottom: 150px;
+    max-width: 300px; /* Ограничиваем ширину */
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 800px) {
+  .movies_page {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main-content {
+    flex: 1;
+    padding: 0px 0px;
+    overflow-y: auto;
+  }
+
+  .content_header {
+    display: none;
+  }
+
+  .movies_grid {
+    display: none;
+  }
+
+  .slider_list {
+    display: block;
   }
 }

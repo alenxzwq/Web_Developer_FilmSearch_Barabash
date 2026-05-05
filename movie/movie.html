@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/style/common.css" />
+    <link rel="stylesheet" href="/style/font.css" />
+    <link rel="stylesheet" href="/style/colors.css" />
+    <link rel="stylesheet" href="/style/movie.css" />
+  </head>
+  <body>
+    <header>
+      <img class="header_logo" src="/assets/icons/logo.svg" />
+      <nav class="header_navigation">
+        <ul class="header_list">
+          <li class="header_list_point"><a></a>Фильмы</li>
+          <li class="header_list_point">Сериалы</li>
+        </ul>
+      </nav>
+      <div class="switch_theme">
+        <p>Тёмная тема</p>
+        <img class="switch_theme_icon" src="/assets/icons/switch_light.svg" />
+      </div>
+
+      <img class="header_burger" src="/assets/icons/burger.svg" />
+    </header>
+
+    <section class="search">
+      <div class="search_container">
+        <div class="search_icon">
+          <img src="/assets/icons/search.svg" alt="Search" />
+        </div>
+        <input type="text" placeholder="Что сегодня посмотреть?" />
+        <button class="search_btn">Найти</button>
+      </div>
+    </section>
+
+    <section class="film">
+      <h1 class="film_title_mobile">Проклятое королевство</h1>
+      <div class="style_card film_poster">
+        <div class="style_card_ratting"><p>9.8</p></div>
+        <div class="style_card_name"></div>
+        <img src="/assets/gallery/poster_1.png" />
+      </div>
+      <div class="film_info">
+        <h1 class="film_title">Проклятое королевство</h1>
+
+        <div class="film_section">
+          <h2>О фильме</h2>
+
+          <div class="film_details">
+            <div class="film_item">
+              <strong>Жанр</strong>
+              <span>Фэнтези, драма</span>
+            </div>
+
+            <div class="film_item">
+              <strong>Страна производства</strong>
+              <span>Великобритания</span>
+            </div>
+
+            <div class="film_item">
+              <strong>Актёры</strong>
+              <span
+                >Альберто Маркез, Наталия Ковальски, Леонардо Родригес, Изабелла
+                Хартман</span
+              >
+            </div>
+
+            <div class="film_item">
+              <strong>Режиссёры</strong>
+              <span>Элиас Торнбридж</span>
+            </div>
+
+            <div class="film_item">
+              <strong>Дата релиза</strong>
+              <span>23 апреля 2023 года</span>
+            </div>
+
+            <div class="film_item">
+              <strong>Возрастное ограничение</strong>
+              <span>16+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="video">
+      <h1 class="video_heading">Трейлер</h1>
+      <video controls>
+        <source
+          src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+          type="video/mp4"
+        />
+      </video>
+    </section>
+
+    <section class="photos">
+      <h1 class="photos_heading" data-text="Кадры из фильма">
+        <span class="desktop-text">Кадры из фильма</span>
+        <span class="mobile-text">Галлерея</span>
+      </h1>
+      <div class="photos_slider_wrapper">
+        <div class="photos_slider_track">
+          <div class="photos_slider_card">
+            <img src="/assets/gallery/film_1.png" />
+          </div>
+          <div class="photos_slider_card">
+            <img src="/assets/gallery/film_1.png" />
+          </div>
+          <div class="photos_slider_card">
+            <img src="/assets/gallery/film_1.png" />
+          </div>
+          <div class="photos_slider_card">
+            <img src="/assets/gallery/film_1.png" />
+          </div>
+        </div>
+      </div>
+      <button class="photos-slider-btn photos-prev-btn">
+        <img src="/assets/icons/arrow_slider_not_active.svg" />
+      </button>
+      <button class="photos-slider-btn photos-next-btn">
+        <img src="/assets/icons/arrow_slider_active.svg" />
+      </button>
+    </section>
+
+    <section class="reviews">
+      <h1 class="reviews_heading">Рецензии зрителей</h1>
+      <div class="review_container">
+        <div class="review_card">
+          <h2>Ирина Глебова</h2>
+          <div class="ratting">
+            <img src="/assets/icons/ic_round-star.svg" />
+            <img src="/assets/icons/ic_round-star.svg" />
+            <img src="/assets/icons/ic_round-star.svg" />
+            <img src="/assets/icons/ic_round-star.svg" />
+            <img src="/assets/icons/ic_round-star.svg" />
+            <img src="/assets/icons/ic_round-star.svg" />
+            <img src="/assets/icons/ic_round-star.svg" />
+            <img src="/assets/icons/ic_round-star.svg" />
+            <img src="/assets/icons/ic_round-star.svg" />
+            <img src="/assets/icons/ic_round-star_.svg" />
+            <img src="/assets/icons/ic_round-star_.svg" />
+          </div>
+          <p>
+            Проклятое королевство — это фильм, который захватил мое сердце и не
+            отпустит. Этот фильм, с его захватывающим сюжетом и отличными
+            актерами, оставил у меня невероятное впечатление. Каждый кадр этого
+            фильма наполнен эмоциями и драматизмом, что делает его идеальным для
+            тех, кто любит киноискусство...
+          </p>
+        </div>
+
+        <div class="review_card">
+          <h2>Мария Семёнова</h2>
+          <div class="ratting">
+            <img src="/assets/icons/ic_round-star.svg" />
+            <img src="/assets/icons/ic_round-star.svg" />
+            <img src="/assets/icons/ic_round-star.svg" />
+            <img src="/assets/icons/ic_round-star.svg" />
+            <img src="/assets/icons/ic_round-star.svg" />
+            <img src="/assets/icons/ic_round-star.svg" />
+            <img src="/assets/icons/ic_round-star.svg" />
+            <img src="/assets/icons/ic_round-star_.svg" />
+            <img src="/assets/icons/ic_round-star_.svg" />
+            <img src="/assets/icons/ic_round-star_.svg" />
+            <img src="/assets/icons/ic_round-star_.svg" />
+          </div>
+          <p>
+            Честно говоря, фильм оставил смешанные впечатления. Нудное начало.
+            Актёры, правда, играют великолепно, но даже они не спасли ситуацию.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer_content">
+        <p>©️ 2026 Барабаш Алёна</p>
+        <div class="social_media">
+          <img src="/assets/icons/telegram.svg" />
+          <img src="/assets/icons/vk.svg" />
+          <img src="/assets/icons/Yandex_Zen.svg" />
+          <img src="/assets/icons/YouTube.svg" />
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
