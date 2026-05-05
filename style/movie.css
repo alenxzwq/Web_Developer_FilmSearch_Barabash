@@ -115,3 +115,57 @@
   font-weight: bold;
   font-size: 14px;
 }
+
+.slider_list {
+  display: none;
+}
+
+@media (min-width: 1750px) {
+  .movies_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    column-gap: 20px;
+    row-gap: 50px;
+
+    margin-bottom: 150px;
+  }
+}
+
+@media (max-width: 1500px) {
+  .movies_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    column-gap: 20px;
+    row-gap: 50px;
+
+    margin-bottom: 150px;
+    max-width: 300px; /* Ограничиваем ширину */
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 800px) {
+  .movies_page {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main-content {
+    flex: 1;
+    padding: 0px 0px;
+    overflow-y: auto;
+  }
+
+  .content_header {
+    display: none;
+  }
+
+  .movies_grid {
+    display: none;
+  }
+
+  .slider_list {
+    display: block;
+  }
+}

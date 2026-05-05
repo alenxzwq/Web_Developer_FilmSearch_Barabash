@@ -45,56 +45,6 @@
   color: #ffffff;
 }
 
-.gallery {
-  position: relative;
-  background-color: var(--white);
-  padding: 100px clamp(1rem, 10%, 15%);
-  max-width: 1600px;
-  margin: 0 auto; /* Центрирование по горизонтали */
-}
-
-.slider_wrapper {
-  position: relative;
-  overflow: hidden;
-  margin: 0 auto; /* Центрируем wrapper */
-}
-
-.slider_track {
-  display: flex;
-  transition: transform 0.5s ease;
-  gap: 100px;
-}
-
-.slider-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-}
-
-.prev-btn {
-  position: absolute;
-  left: 20px; /* Отступ от края галереи */
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.next-btn {
-  position: absolute;
-  right: 30px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.slider-btn img {
-  width: 24px;
-  height: 24px;
-}
-
 .aboutUs {
   position: relative;
   background-color: #000;
@@ -255,18 +205,6 @@
     transform: translate(-50%, -50%);
   }
 
-  .prev-btn {
-    left: 10px;
-  }
-
-  .next-btn {
-    right: 10px;
-  }
-  .slider-btn img {
-    width: 30px;
-    height: 30px;
-  }
-
   .aboutUs {
     position: relative;
     background-color: #000;
@@ -293,34 +231,6 @@
 }
 
 @media (max-width: 600px) {
-  .gallery {
-    max-width: 600px;
-  }
-
-  .slider_track {
-    gap: 80px;
-  }
-
-  .slider_item {
-    width: 300px;
-    height: 430px;
-    overflow: hidden;
-    cursor: pointer;
-    position: relative;
-  }
-
-  .prev-btn {
-    left: 5px;
-  }
-
-  .next-btn {
-    right: 5px;
-  }
-  .slider-btn img {
-    width: 30px;
-    height: 30px;
-  }
-
   .aboutUs {
     position: relative;
     background-color: #000;

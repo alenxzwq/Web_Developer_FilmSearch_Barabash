@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Что сегодня посмотреть?</title>
+
+    <link rel="stylesheet" href="/style/common.css" />
+    <link rel="stylesheet" href="/style/font.css" />
+    <link rel="stylesheet" href="/style/colors.css" />
+    <link rel="stylesheet" href="/style/movie.css" />
+    <link rel="stylesheet" href="/style/list.css" />
+  </head>
+  <body>
+    <header>
+      <img class="header_logo" src="/assets/icons/logo.svg" />
+      <nav class="header_navigation">
+        <ul class="header_list">
+          <li class="header_list_point"><a></a>Фильмы</li>
+          <li class="header_list_point">Сериалы</li>
+        </ul>
+      </nav>
+      <div class="switch_theme">
+        <p>Тёмная тема</p>
+        <img class="switch_theme_icon" src="/assets/icons/switch_light.svg" />
+      </div>
+
+      <img class="header_burger" src="/assets/icons/burger.svg" />
+    </header>
+
+    <section class="search">
+      <div class="search_container">
+        <div class="search_icon">
+          <img src="/assets/icons/search.svg" alt="Search" />
+        </div>
+        <input type="text" placeholder="Что сегодня посмотреть?" />
+        <button class="search_btn">Найти</button>
+      </div>
+    </section>
+
+    <section class="movies_page">
+      <aside class="sidebar">
+        <div class="sidebar_filters">
+          <h1 class="sidebar_heading">Сериалы</h1>
+          <div class="filter_group">
+            <label>Жанр</label>
+            <div class="select_container">
+              <select class="style_select">
+                <option>Все жанры</option>
+                <option>Боевик</option>
+                <option>Комедия</option>
+                <option>Драма</option>
+                <option>Фантастика</option>
+              </select>
+              <img
+                class="select_arrow"
+                src="/assets/icons/selected_arrow.svg"
+              />
+            </div>
+          </div>
+
+          <div class="filter_group">
+            <label>Рейтинг</label>
+            <div class="select_container">
+              <select class="style_select">
+                <option>Все жанры</option>
+                <option>Боевик</option>
+                <option>Комедия</option>
+                <option>Драма</option>
+                <option>Фантастика</option>
+              </select>
+              <img
+                class="select_arrow"
+                src="/assets/icons/selected_arrow.svg"
+              />
+            </div>
+          </div>
+
+          <div class="filter_group">
+            <label>Страна</label>
+            <div class="select_container">
+              <select class="style_select">
+                <option>Все жанры</option>
+                <option>Боевик</option>
+                <option>Комедия</option>
+                <option>Драма</option>
+                <option>Фантастика</option>
+              </select>
+              <img
+                class="select_arrow"
+                src="/assets/icons/selected_arrow.svg"
+              />
+            </div>
+          </div>
+
+          <div class="filter_group">
+            <label>Год выпуска</label>
+            <div class="select_container">
+              <select class="style_select">
+                <option>Все жанры</option>
+                <option>Боевик</option>
+                <option>Комедия</option>
+                <option>Драма</option>
+                <option>Фантастика</option>
+              </select>
+              <img
+                class="select_arrow"
+                src="/assets/icons/selected_arrow.svg"
+              />
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <div class="content_header">
+          <h1>Сериалы</h1>
+
+          <div class="pages">
+            <span class="active">1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+          </div>
+        </div>
+
+        <div class="movies_grid">
+          <!-- Карточки фильмов -->
+          <div class="style_card">
+            <div class="style_card_ratting"><p>9.8</p></div>
+            <div class="style_card_name"><p>Проклятое королевство</p></div>
+            <img src="/assets/gallery/poster_1.png" />
+          </div>
+          <div class="style_card">
+            <div class="style_card_ratting"><p>9.8</p></div>
+            <div class="style_card_name"><p>Проклятое королевство</p></div>
+            <img src="/assets/gallery/poster_1.png" />
+          </div>
+          <div class="style_card">
+            <div class="style_card_ratting"><p>9.8</p></div>
+            <div class="style_card_name"><p>Проклятое королевство</p></div>
+            <img src="/assets/gallery/poster_1.png" />
+          </div>
+          <div class="style_card">
+            <div class="style_card_ratting"><p>9.8</p></div>
+            <div class="style_card_name"><p>Проклятое королевство</p></div>
+            <img src="/assets/gallery/poster_1.png" />
+          </div>
+          <div class="style_card">
+            <div class="style_card_ratting"><p>9.8</p></div>
+            <div class="style_card_name"><p>Проклятое королевство</p></div>
+            <img src="/assets/gallery/poster_1.png" />
+          </div>
+          <div class="style_card">
+            <div class="style_card_ratting"><p>9.8</p></div>
+            <div class="style_card_name"><p>Проклятое королевство</p></div>
+            <img src="/assets/gallery/poster_1.png" />
+          </div>
+          <div class="style_card">
+            <div class="style_card_ratting"><p>9.8</p></div>
+            <div class="style_card_name"><p>Проклятое королевство</p></div>
+            <img src="/assets/gallery/poster_1.png" />
+          </div>
+          <div class="style_card">
+            <div class="style_card_ratting"><p>9.8</p></div>
+            <div class="style_card_name"><p>Проклятое королевство</p></div>
+            <img src="/assets/gallery/poster_1.png" />
+          </div>
+          <div class="style_card">
+            <div class="style_card_ratting"><p>9.8</p></div>
+            <div class="style_card_name"><p>Проклятое королевство</p></div>
+            <img src="/assets/gallery/poster_1.png" />
+          </div>
+        </div>
+
+        <section class="gallery slider_list">
+          <div class="slider_wrapper">
+            <div class="slider_track">
+              <div class="style_card">
+                <div class="style_card_ratting"><p>9.8</p></div>
+                <div class="style_card_name"><p>Проклятое королевство</p></div>
+                <img src="/assets/gallery/poster_1.png" />
+              </div>
+              <div class="style_card">
+                <div class="style_card_ratting"><p>9.8</p></div>
+                <div class="style_card_name"><p>Проклятое королевство</p></div>
+                <img src="/assets/gallery/poster_1.png" />
+              </div>
+              <div class="style_card">
+                <div class="style_card_ratting"><p>9.8</p></div>
+                <div class="style_card_name"><p>Проклятое королевство</p></div>
+                <img src="/assets/gallery/poster_1.png" />
+              </div>
+              <div class="style_card">
+                <div class="style_card_ratting"><p>9.8</p></div>
+                <div class="style_card_name"><p>Проклятое королевство</p></div>
+                <img src="/assets/gallery/poster_1.png" />
+              </div>
+              <div class="style_card">
+                <div class="style_card_ratting"><p>9.8</p></div>
+                <div class="style_card_name"><p>Проклятое королевство</p></div>
+                <img src="/assets/gallery/poster_1.png" />
+              </div>
+              <div class="style_card">
+                <div class="style_card_ratting"><p>9.8</p></div>
+                <div class="style_card_name"><p>Проклятое королевство</p></div>
+                <img src="/assets/gallery/poster_1.png" />
+              </div>
+              <div class="style_card">
+                <div class="style_card_ratting"><p>9.8</p></div>
+                <div class="style_card_name"><p>Проклятое королевство</p></div>
+                <img src="/assets/gallery/poster_1.png" />
+              </div>
+            </div>
+          </div>
+          <button class="slider-btn prev-btn">
+            <img src="/assets/icons/arrow_slider_not_active.svg" />
+          </button>
+          <button class="slider-btn next-btn">
+            <img src="/assets/icons/arrow_slider_active.svg" />
+          </button>
+        </section>
+      </main>
+    </section>
+
+    <footer>
+      <div class="footer_content">
+        <p>©️ 2026 Барабаш Алёна</p>
+        <div class="social_media">
+          <img src="/assets/icons/telegram.svg" />
+          <img src="/assets/icons/vk.svg" />
+          <img src="/assets/icons/Yandex_Zen.svg" />
+          <img src="/assets/icons/YouTube.svg" />
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

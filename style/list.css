@@ -103,3 +103,38 @@
 .pages .active {
   color: #000000;
 }
+
+.sidebar_heading {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .sidebar {
+    width: 100%;
+    order: -1;
+    padding: 35px 50px 100px 30px;
+    min-height: 0px;
+    height: 900px;
+
+    position: relative;
+    box-shadow: none;
+  }
+
+  .pages {
+    display: none;
+  }
+
+  .sidebar_heading {
+    display: block;
+
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 120%;
+    margin-bottom: 50px;
+    /* or 43px */
+
+    color: #000000;
+  }
+}
