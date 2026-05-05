@@ -2,7 +2,7 @@
 .movies_page {
   display: flex;
   min-height: 100vh;
-  background-color: #0a0a0a;
+  background-color: #ffffff;
 }
 
 .main-content {
@@ -19,12 +19,18 @@
   margin-bottom: 40px;
   flex-wrap: wrap;
   gap: 20px;
+
+  margin-top: 110px;
 }
 
 .content_header h1 {
-  color: white;
-  font-size: 32px;
-  font-weight: 700;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 135%;
+
+  color: #010101;
 }
 
 .search_sort {
@@ -54,8 +60,11 @@
 /* Сетка фильмов */
 .movies_grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  column-gap: 20px;
+  row-gap: 50px;
+
+  margin-bottom: 150px;
 }
 
 /* Карточка фильма */

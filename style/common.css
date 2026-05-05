@@ -263,6 +263,90 @@ footer p {
   gap: 20px;
 }
 
+.style_card {
+  flex-shrink: 0;
+  width: 350px;
+  height: 500px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+
+.style_card img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* .slider_item > div {
+  position: relative;
+  z-index: 2;
+} */
+
+.style_card_ratting {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  top: 15px;
+  left: 15px;
+  background-color: #3bb33b;
+  border-radius: 2px;
+
+  width: 50px;
+  height: 30px;
+
+  z-index: 3;
+}
+
+.style_card_ratting p {
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 16.5px;
+
+  color: var(--white);
+}
+
+.style_card_name {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+
+  z-index: 3;
+
+  width: 100%;
+  height: 222px;
+  left: 0px;
+  bottom: 0px;
+
+  background: linear-gradient(180deg, rgba(1, 1, 1, 0) 11.14%, #010101 28.92%);
+}
+
+.style_card_name p {
+  font-family: "Inter";
+  font-weight: 600;
+  font-size: 29px;
+  line-height: 36px;
+
+  position: absolute;
+  left: 15px;
+  bottom: 55px;
+  margin-right: 20%;
+
+  color: var(--white);
+}
+
 @media (max-width: 1024px) {
   header {
     padding-top: 20px;
