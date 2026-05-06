@@ -20,8 +20,17 @@
         </ul>
       </nav>
       <div class="switch_theme">
-        <p>Тёмная тема</p>
-        <img class="switch_theme_icon" src="/assets/icons/switch_light.svg" />
+        <p id="toggleText">Тёмная тема</p>
+        <button id="toggleBtn">
+          <img
+            class="switch_theme_icon light-toggle"
+            src="/assets/icons/switch_light.svg"
+          />
+          <img
+            class="switch_theme_icon dark-toggle"
+            src="/assets/icons/switch_dark.svg"
+          />
+        </button>
       </div>
 
       <img class="header_burger" src="/assets/icons/burger.svg" />
@@ -38,7 +47,12 @@
 
       <div class="sidebar_theme">
         <p>Тёмная тема</p>
-        <img class="sidebar_theme_icon" src="/assets/icons/switch_light.svg" />
+        <button id="toggleBtnMobile">
+          <img
+            class="sidebar_theme_icon"
+            src="/assets/icons/switch_light.svg"
+          />
+        </button>
       </div>
     </div>
 
@@ -100,7 +114,8 @@
         <img src="/assets/icons/arrow_slider_not_active.svg" />
       </button>
       <button class="slider-btn next-btn">
-        <img src="/assets/icons/arrow_slider_active.svg" />
+        <img class="light-icon" src="/assets/icons/arrow_slider_active.svg" />
+        <img class="dark-icon" src="/assets/icons/light_arrow_slider.svg" />
       </button>
     </section>
 
@@ -143,4 +158,6 @@
       </div>
     </footer>
   </body>
+
+  <script src="/scripts.js"></script>
 </html>

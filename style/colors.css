@@ -1,9 +1,20 @@
 :root {
-  --white: #ffffff;
+  --bg-color: #ffffff;
+  --text-color: #010101;
+  --sideBar-bg: #ffffff;
+  --review-bg: #f2f2f2;
   --hoverIcon: #855bfc;
   --black: #020202;
   --hoverBtn: #504c4c;
   --select-background: #f2f2f2;
   --select-text: #686868;
   --gray: #c0c0c0;
+}
+
+:root.dark-theme {
+  --bg-color: #1a1a1a;
+  --text-color: #ffffff;
+  --sideBar-bg: #000000;
+  --select-background: #1d1d1d;
+  --review-bg: #000000;
 }

@@ -20,12 +20,41 @@
         </ul>
       </nav>
       <div class="switch_theme">
-        <p>Тёмная тема</p>
-        <img class="switch_theme_icon" src="/assets/icons/switch_light.svg" />
+        <p id="toggleText">Тёмная тема</p>
+        <button id="toggleBtn">
+          <img
+            class="switch_theme_icon light-toggle"
+            src="/assets/icons/switch_light.svg"
+          />
+          <img
+            class="switch_theme_icon dark-toggle"
+            src="/assets/icons/switch_dark.svg"
+          />
+        </button>
       </div>
 
       <img class="header_burger" src="/assets/icons/burger.svg" />
     </header>
+
+    <div class="sidebar">
+      <img class="sidebar_close" src="/assets/icons/close_black.svg" />
+      <nav class="sidebar_navigation">
+        <ul class="sidebar_list">
+          <li class="sidebar_list_point"><a></a>Фильмы</li>
+          <li class="sidebar_list_point">Сериалы</li>
+        </ul>
+      </nav>
+
+      <div class="sidebar_theme">
+        <p>Тёмная тема</p>
+        <button id="toggleBtnMobile">
+          <img
+            class="sidebar_theme_icon"
+            src="/assets/icons/switch_light.svg"
+          />
+        </button>
+      </div>
+    </div>
 
     <section class="search">
       <div class="search_container">
@@ -123,7 +152,8 @@
         <img src="/assets/icons/arrow_slider_not_active.svg" />
       </button>
       <button class="photos-slider-btn photos-next-btn">
-        <img src="/assets/icons/arrow_slider_active.svg" />
+        <img class="light-icon" src="/assets/icons/arrow_slider_active.svg" />
+        <img class="dark-icon" src="/assets/icons/light_arrow_slider.svg" />
       </button>
     </section>
 
@@ -133,17 +163,17 @@
         <div class="review_card">
           <h2>Ирина Глебова</h2>
           <div class="ratting">
-            <img src="/assets/icons/ic_round-star.svg" />
-            <img src="/assets/icons/ic_round-star.svg" />
-            <img src="/assets/icons/ic_round-star.svg" />
-            <img src="/assets/icons/ic_round-star.svg" />
-            <img src="/assets/icons/ic_round-star.svg" />
-            <img src="/assets/icons/ic_round-star.svg" />
-            <img src="/assets/icons/ic_round-star.svg" />
-            <img src="/assets/icons/ic_round-star.svg" />
-            <img src="/assets/icons/ic_round-star.svg" />
-            <img src="/assets/icons/ic_round-star_.svg" />
-            <img src="/assets/icons/ic_round-star_.svg" />
+            <img class="star-filled" src="/assets/icons/ic_round-star.svg" />
+            <img class="star-filled" src="/assets/icons/ic_round-star.svg" />
+            <img class="star-filled" src="/assets/icons/ic_round-star.svg" />
+            <img class="star-filled" src="/assets/icons/ic_round-star.svg" />
+            <img class="star-filled" src="/assets/icons/ic_round-star.svg" />
+            <img class="star-filled" src="/assets/icons/ic_round-star.svg" />
+            <img class="star-filled" src="/assets/icons/ic_round-star.svg" />
+            <img class="star-filled" src="/assets/icons/ic_round-star.svg" />
+            <img class="star-filled" src="/assets/icons/ic_round-star.svg" />
+            <img class="star-empty" src="/assets/icons/ic_round-star_.svg" />
+            <img class="star-empty" src="/assets/icons/ic_round-star_.svg" />
           </div>
           <p>
             Проклятое королевство — это фильм, который захватил мое сердце и не
@@ -157,17 +187,17 @@
         <div class="review_card">
           <h2>Мария Семёнова</h2>
           <div class="ratting">
-            <img src="/assets/icons/ic_round-star.svg" />
-            <img src="/assets/icons/ic_round-star.svg" />
-            <img src="/assets/icons/ic_round-star.svg" />
-            <img src="/assets/icons/ic_round-star.svg" />
-            <img src="/assets/icons/ic_round-star.svg" />
-            <img src="/assets/icons/ic_round-star.svg" />
-            <img src="/assets/icons/ic_round-star.svg" />
-            <img src="/assets/icons/ic_round-star_.svg" />
-            <img src="/assets/icons/ic_round-star_.svg" />
-            <img src="/assets/icons/ic_round-star_.svg" />
-            <img src="/assets/icons/ic_round-star_.svg" />
+            <img class="star-filled" src="/assets/icons/ic_round-star.svg" />
+            <img class="star-filled" src="/assets/icons/ic_round-star.svg" />
+            <img class="star-filled" src="/assets/icons/ic_round-star.svg" />
+            <img class="star-filled" src="/assets/icons/ic_round-star.svg" />
+            <img class="star-filled" src="/assets/icons/ic_round-star.svg" />
+            <img class="star-filled" src="/assets/icons/ic_round-star.svg" />
+            <img class="star-filled" src="/assets/icons/ic_round-star.svg" />
+            <img class="star-empty" src="/assets/icons/ic_round-star_.svg" />
+            <img class="star-empty" src="/assets/icons/ic_round-star_.svg" />
+            <img class="star-empty" src="/assets/icons/ic_round-star_.svg" />
+            <img class="star-empty" src="/assets/icons/ic_round-star_.svg" />
           </div>
           <p>
             Честно говоря, фильм оставил смешанные впечатления. Нудное начало.
@@ -189,4 +219,6 @@
       </div>
     </footer>
   </body>
+
+  <script src="/scripts.js"></script>
 </html>

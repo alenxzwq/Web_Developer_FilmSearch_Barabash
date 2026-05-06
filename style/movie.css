@@ -1,5 +1,6 @@
 .film {
   padding: 140px clamp(1rem, 10%, 15%);
+  background-color: var(--bg-color);
 }
 
 .film {
@@ -18,7 +19,7 @@
   font-size: 64px;
   line-height: 135%;
 
-  color: var(--black);
+  color: var(--text-color);
 }
 
 .film_section h2 {
@@ -28,7 +29,7 @@
   font-size: 32px;
   line-height: 135%;
 
-  color: var(--black);
+  color: var(--text-color);
   margin-top: 70px;
 }
 
@@ -69,9 +70,8 @@
   font-weight: 600;
   font-size: 20px;
   line-height: 135%;
-  /* or 32px */
 
-  color: #000000;
+  color: var(--text-color);
 }
 
 .film_title_mobile {
@@ -88,6 +88,7 @@
 
 .video {
   padding: 50px clamp(1rem, 10%, 15%);
+  background-color: var(--bg-color);
 }
 
 .video_heading {
@@ -97,7 +98,7 @@
   font-size: 36px;
   line-height: 135%;
 
-  color: var(--black);
+  color: var(--text-color);
 }
 
 video {
@@ -116,7 +117,8 @@ video {
   background-color: var(--white);
   padding: 100px clamp(1rem, 10%, 15%);
   max-width: 2000px;
-  margin: 0 auto; /* Центрирование по горизонтали */
+  margin: 0 auto;
+  background-color: var(--bg-color);
 }
 
 .photos_heading {
@@ -126,7 +128,7 @@ video {
   font-size: 36px;
   line-height: 135%;
 
-  color: var(--black);
+  color: var(--text-color);
   margin-bottom: 70px;
 }
 
@@ -189,6 +191,22 @@ video {
   height: 35px;
 }
 
+.light-icon {
+  display: block;
+}
+
+.dark-icon {
+  display: none;
+}
+
+:root.dark-theme .light-icon {
+  display: none;
+}
+
+:root.dark-theme .dark-icon {
+  display: block;
+}
+
 .desktop-text {
   display: inline;
 }
@@ -204,12 +222,13 @@ video {
   font-size: 36px;
   line-height: 135%;
 
-  color: var(--black);
+  color: var(--text-color);
   margin-bottom: 70px;
 }
 
 .reviews {
   padding: 100px clamp(1rem, 10%, 15%);
+  background-color: var(--bg-color);
 }
 
 .review_container {
@@ -222,7 +241,7 @@ video {
   width: 620px;
   height: 460px;
   padding: 50px 60px 0px 45px;
-  background-color: #f2f2f2;
+  background-color: var(--review-bg);
 
   display: flex;
   flex-direction: column;
@@ -235,7 +254,7 @@ video {
   font-size: 24px;
   line-height: 135%;
 
-  color: var(--black);
+  color: var(--text-color);
 }
 
 .ratting {
@@ -246,8 +265,17 @@ video {
 .ratting img {
   width: 30px;
   height: 30px;
+  filter: none;
 }
 
+:root.dark-theme .star-filled {
+  filter: brightness(0) invert(1);
+}
+
+:root.dark-theme .star-empty {
+  filter: brightness(0) invert(1);
+  opacity: 0.3;
+}
 .review_card p {
   font-family: "Inter";
   font-style: normal;
@@ -257,7 +285,18 @@ video {
 
   margin-top: 40px;
 
-  color: var(--black);
+  color: var(--text-color);
+}
+
+@media (min-width: 1900px) {
+  .photos {
+    position: relative;
+    background-color: var(--white);
+    padding: 100px clamp(1rem, 10%, 15%);
+    max-width: 3000px;
+    margin: 0 auto;
+    background-color: var(--bg-color);
+  }
 }
 
 @media (max-width: 1400px) {
@@ -297,7 +336,7 @@ video {
     font-size: 24px;
     line-height: 135%;
 
-    color: var(--black);
+    color: var(--text-color);
   }
 
   .ratting img {
@@ -311,7 +350,7 @@ video {
 
     margin-top: 40px;
 
-    color: var(--black);
+    color: var(--text-color);
   }
 }
 
@@ -329,6 +368,8 @@ video {
   .film_title_mobile {
     display: block;
     font-size: 50px;
+
+    color: var(--text-color);
   }
 
   .film_item {
@@ -374,7 +415,7 @@ video {
     width: 100%;
     height: 460px;
     padding: 50px 60px 0px 45px;
-    background-color: #f2f2f2;
+    background-color: var(--review-bg);
 
     display: flex;
     flex-direction: column;
@@ -387,7 +428,7 @@ video {
     font-size: 24px;
     line-height: 135%;
 
-    color: var(--black);
+    color: var(--text-color);
   }
 
   .ratting {
@@ -409,7 +450,7 @@ video {
 
     margin-top: 40px;
 
-    color: var(--black);
+    color: var(--text-color);
   }
 }
 
@@ -417,6 +458,8 @@ video {
   .film_title_mobile {
     font-size: 35px;
     line-height: 135%;
+
+    color: var(--text-color);
   }
 
   .film_section h2 {
@@ -453,7 +496,7 @@ video {
 
   .photos {
     position: relative;
-    background-color: var(--white);
+    background-color: var(--bg-color);
     padding: 20px 0px 0px 30px;
     max-width: 2000px;
     margin: 0 auto;
@@ -501,7 +544,7 @@ video {
     width: 100%;
     height: 660px;
     padding: 50px 20px 0px 20px;
-    background-color: #f2f2f2;
+    background-color: var(--review-bg);
 
     display: flex;
     flex-direction: column;

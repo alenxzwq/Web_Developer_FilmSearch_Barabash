@@ -98,7 +98,7 @@ header {
   justify-content: space-between;
   padding: 1% clamp(1rem, 10%, 15%) 1% clamp(1rem, 10%, 15%);
 
-  background-color: var(--white);
+  background-color: var(--bg-color);
 }
 
 .header_list {
@@ -107,6 +107,8 @@ header {
   gap: clamp(1rem, 4vw, 65px);
   margin-top: 15px;
   font-size: 20px;
+
+  color: var(--text-color);
 }
 
 .header_list_point {
@@ -118,10 +120,28 @@ header {
   align-items: center;
   gap: clamp(0.5rem, 2vw, 20px);
   margin-top: 15px;
+
+  color: var(--text-color);
 }
 
 .switch_theme_icon {
   cursor: pointer;
+}
+
+.light-toggle {
+  display: block;
+}
+
+.dark-toggle {
+  display: none;
+}
+
+:root.dark-theme .light-toggle {
+  display: none;
+}
+
+:root.dark-theme .dark-toggle {
+  display: block;
 }
 
 .header_burger {
@@ -135,8 +155,8 @@ header {
   right: 0;
   width: 220px;
   height: 100vh;
-  background-color: var(--white);
-  color: white;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   padding: 20px;
   overflow-y: auto;
   z-index: 1000;
@@ -228,7 +248,7 @@ header {
 .search_btn {
   padding: 25px 65px;
   background-color: var(--black);
-  color: var(--white);
+  color: #ffffff;
   font-size: 24px;
   border: none;
   border-radius: 100px;
@@ -255,7 +275,7 @@ footer p {
   font-size: 26px;
   line-height: 125%;
 
-  color: var(--white);
+  color: #ffffff;
 }
 
 .social_media {
@@ -309,7 +329,7 @@ footer p {
   font-weight: 700;
   font-size: 16.5px;
 
-  color: var(--white);
+  color: #ffffff;
 }
 
 .style_card_name {
@@ -344,12 +364,12 @@ footer p {
   bottom: 55px;
   margin-right: 20%;
 
-  color: var(--white);
+  color: #ffffff;
 }
 
 .gallery {
   position: relative;
-  background-color: var(--white);
+  background-color: var(--bg-color);
   padding: 100px clamp(1rem, 10%, 15%);
   max-width: 1600px;
   margin: 0 auto; /* Центрирование по горизонтали */
@@ -392,9 +412,26 @@ footer p {
   top: 50%;
   transform: translateY(-50%);
 }
+
+.light-icon {
+  display: block;
+}
+
+.dark-icon {
+  display: none;
+}
+
+:root.dark-theme .light-icon {
+  display: none;
+}
+
+:root.dark-theme .dark-icon {
+  display: block;
+}
+
 .slider-btn img {
-  width: 24px;
-  height: 24px;
+  width: 34px;
+  height: 34px;
 }
 
 @media (max-width: 1024px) {
@@ -417,6 +454,10 @@ footer p {
 
     width: 40px;
     height: 30px;
+  }
+
+  :root.dark-theme .header_burger {
+    filter: brightness(0) invert(1);
   }
 
   .search {
@@ -579,7 +620,7 @@ footer p {
     font-size: 22px;
     line-height: 125%;
 
-    color: var(--white);
+    color: #ffffff;
   }
 
   .gallery {

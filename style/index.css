@@ -108,9 +108,9 @@
   color: #ffffff;
 }
 
-@media (min-width: 1900px) {
+@media (min-width: 1580px) {
   .gallery {
-    max-width: 1900px;
+    max-width: 3000px;
   }
 }
 

@@ -1,8 +1,7 @@
-/* Основной контейнер */
 .movies_page {
   display: flex;
   min-height: 100vh;
-  background-color: #ffffff;
+  background-color: var(--bg-color);
 }
 
 .main-content {
@@ -30,7 +29,7 @@
   font-size: 64px;
   line-height: 135%;
 
-  color: #010101;
+  color: var(--text-color);
 }
 
 .search_sort {
@@ -126,7 +125,7 @@
   left: 0;
   width: 340px;
   min-height: 100vh;
-  background: var(--white);
+  background: var(--sideBar-bg);
 
   display: flex;
   flex-direction: column;
@@ -164,7 +163,7 @@
   font-size: 32px;
   line-height: 39px;
 
-  color: #000000;
+  color: var(--text-color);
 }
 
 .select_container {
@@ -223,7 +222,7 @@
 }
 
 .pages .active {
-  color: #000000;
+  color: var(--text-color);
 }
 
 .sidebar_heading {
@@ -236,7 +235,7 @@
     order: -1;
     padding: 35px 50px 100px 30px;
     min-height: 0px;
-    height: 900px;
+    height: 1000px;
 
     position: relative;
     box-shadow: none;
@@ -257,7 +256,7 @@
     margin-bottom: 50px;
     /* or 43px */
 
-    color: #000000;
+    color: var(--text-color);
   }
 }
 
@@ -307,6 +306,22 @@
   }
 
   .slider_list {
+    display: block;
+  }
+
+  .light-icon {
+    display: block;
+  }
+
+  .dark-icon {
+    display: none;
+  }
+
+  :root.dark-theme .light-icon {
+    display: none;
+  }
+
+  :root.dark-theme .dark-icon {
     display: block;
   }
 }
