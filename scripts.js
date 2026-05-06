@@ -33,6 +33,7 @@ function initTheme() {
 }
 
 toggleBtn.addEventListener("click", toggleTheme);
+toggleBtnMobile.addEventListener("click", toggleTheme);
 
 initTheme();
 
@@ -254,4 +255,23 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .querySelectorAll(".photos")
     .forEach((photos) => new UniversalSlider(photos));
+});
+
+let isOpen = false;
+const burger = document.getElementById("burger");
+const menu = document.getElementById("sidebar");
+const close = document.getElementById("close");
+
+burger.addEventListener("click", () => {
+  if (isOpen) {
+    menu.classList.remove("active");
+    isOpen = false;
+  } else {
+    menu.classList.add("active");
+    isOpen = true;
+  }
+});
+
+close.addEventListener("click", () => {
+  menu.classList.remove("active");
 });

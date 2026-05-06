@@ -34,11 +34,15 @@
         </button>
       </div>
 
-      <img class="header_burger" src="/assets/icons/burger.svg" />
+      <img class="header_burger" id="burger" src="/assets/icons/burger.svg" />
     </header>
 
-    <div class="sidebar">
-      <img class="sidebar_close" src="/assets/icons/close_black.svg" />
+    <div class="sidebar" id="sidebar">
+      <img
+        class="sidebar_close"
+        id="close"
+        src="/assets/icons/close_black.svg"
+      />
       <nav class="sidebar_navigation">
         <ul class="sidebar_list">
           <li class="sidebar_list_point"><a></a>Фильмы</li>
@@ -50,8 +54,12 @@
         <p>Тёмная тема</p>
         <button id="toggleBtnMobile">
           <img
-            class="sidebar_theme_icon"
+            class="sidebar_theme_icon light-toggle"
             src="/assets/icons/switch_light.svg"
+          />
+          <img
+            class="sidebar_theme_icon dark-toggle"
+            src="/assets/icons/switch_dark.svg"
           />
         </button>
       </div>

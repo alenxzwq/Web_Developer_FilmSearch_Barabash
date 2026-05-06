@@ -149,10 +149,9 @@ header {
 }
 
 .sidebar {
-  display: none;
   position: fixed;
   top: 0;
-  right: 0;
+  right: -220px;
   width: 220px;
   height: 100vh;
   background-color: var(--bg-color);
@@ -160,6 +159,14 @@ header {
   padding: 20px;
   overflow-y: auto;
   z-index: 1000;
+
+  transition: right 0.3s ease-in-out;
+
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar.active {
+  right: 0;
 }
 
 .sidebar_close {
@@ -170,6 +177,10 @@ header {
   cursor: pointer;
 }
 
+:root.dark-theme .sidebar_close {
+  filter: brightness(0) invert(1);
+}
+
 .sidebar_list {
   display: flex;
   flex-direction: column;
@@ -178,8 +189,7 @@ header {
   margin-top: 80px;
   margin-left: 30px;
   font-size: 20px;
-
-  color: var(--black);
+  color: var(--text-color);
 }
 
 .sidebar_list_point {
@@ -195,7 +205,7 @@ header {
   gap: 10px;
   bottom: 55px;
 
-  color: var(--black);
+  color: var(--text-color);
 }
 
 .sidebar_theme_icon {
