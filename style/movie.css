@@ -178,12 +178,13 @@ video {
   left: 60px;
   top: 60%;
   transform: translateY(-50%);
+  transform: scaleX(-1);
 }
 
 .photos-next-btn {
   position: absolute;
   right: 60px;
-  top: 60%;
+  top: 62%;
   transform: translateY(-50%);
 }
 .photos-slider-btn img {
@@ -392,12 +393,13 @@ video {
     left: 20px;
     top: 60%;
     transform: translateY(-50%);
+    transform: scaleX(-1);
   }
 
   .photos-next-btn {
     position: absolute;
     right: 20px;
-    top: 60%;
+    top: 62%;
     transform: translateY(-50%);
   }
 }
@@ -515,6 +517,7 @@ video {
 
   .photos-prev-btn {
     right: 90px;
+    transform: scaleX(-1);
   }
 
   .desktop-text {

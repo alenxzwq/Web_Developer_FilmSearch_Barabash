@@ -36,6 +36,26 @@
       <img class="header_burger" src="/assets/icons/burger.svg" />
     </header>
 
+    <div class="sidebar">
+      <img class="sidebar_close" src="/assets/icons/close_black.svg" />
+      <nav class="sidebar_navigation">
+        <ul class="sidebar_list">
+          <li class="sidebar_list_point"><a></a>Фильмы</li>
+          <li class="sidebar_list_point">Сериалы</li>
+        </ul>
+      </nav>
+
+      <div class="sidebar_theme">
+        <p>Тёмная тема</p>
+        <button id="toggleBtnMobile">
+          <img
+            class="sidebar_theme_icon"
+            src="/assets/icons/switch_light.svg"
+          />
+        </button>
+      </div>
+    </div>
+
     <section class="search">
       <div class="search_container">
         <div class="search_icon">
@@ -47,7 +67,7 @@
     </section>
 
     <section class="movies_page">
-      <aside class="sidebar">
+      <aside class="sidebarFilter">
         <div class="sidebar_filters">
           <h1 class="sidebar_heading">Сериалы</h1>
           <div class="filter_group">
@@ -181,59 +201,56 @@
             <img src="/assets/gallery/poster_1.png" />
           </div>
         </div>
-
-        <section class="gallery slider_list">
-          <div class="slider_wrapper">
-            <div class="slider_track">
-              <div class="style_card">
-                <div class="style_card_ratting"><p>9.8</p></div>
-                <div class="style_card_name"><p>Проклятое королевство</p></div>
-                <img src="/assets/gallery/poster_1.png" />
-              </div>
-              <div class="style_card">
-                <div class="style_card_ratting"><p>9.8</p></div>
-                <div class="style_card_name"><p>Проклятое королевство</p></div>
-                <img src="/assets/gallery/poster_1.png" />
-              </div>
-              <div class="style_card">
-                <div class="style_card_ratting"><p>9.8</p></div>
-                <div class="style_card_name"><p>Проклятое королевство</p></div>
-                <img src="/assets/gallery/poster_1.png" />
-              </div>
-              <div class="style_card">
-                <div class="style_card_ratting"><p>9.8</p></div>
-                <div class="style_card_name"><p>Проклятое королевство</p></div>
-                <img src="/assets/gallery/poster_1.png" />
-              </div>
-              <div class="style_card">
-                <div class="style_card_ratting"><p>9.8</p></div>
-                <div class="style_card_name"><p>Проклятое королевство</p></div>
-                <img src="/assets/gallery/poster_1.png" />
-              </div>
-              <div class="style_card">
-                <div class="style_card_ratting"><p>9.8</p></div>
-                <div class="style_card_name"><p>Проклятое королевство</p></div>
-                <img src="/assets/gallery/poster_1.png" />
-              </div>
-              <div class="style_card">
-                <div class="style_card_ratting"><p>9.8</p></div>
-                <div class="style_card_name"><p>Проклятое королевство</p></div>
-                <img src="/assets/gallery/poster_1.png" />
-              </div>
-            </div>
-          </div>
-          <button class="slider-btn prev-btn">
-            <img src="/assets/icons/arrow_slider_not_active.svg" />
-          </button>
-          <button class="slider-btn next-btn">
-            <img
-              class="light-icon"
-              src="/assets/icons/arrow_slider_active.svg"
-            />
-            <img class="dark-icon" src="/assets/icons/light_arrow_slider.svg" />
-          </button>
-        </section>
       </main>
+    </section>
+
+    <section class="gallery slider_list">
+      <div class="slider_wrapper">
+        <div class="slider_track">
+          <div class="style_card">
+            <div class="style_card_ratting"><p>9.8</p></div>
+            <div class="style_card_name"><p>Проклятое королевство</p></div>
+            <img src="/assets/gallery/poster_1.png" />
+          </div>
+          <div class="style_card">
+            <div class="style_card_ratting"><p>9.8</p></div>
+            <div class="style_card_name"><p>Проклятое королевство</p></div>
+            <img src="/assets/gallery/poster_1.png" />
+          </div>
+          <div class="style_card">
+            <div class="style_card_ratting"><p>9.8</p></div>
+            <div class="style_card_name"><p>Проклятое королевство</p></div>
+            <img src="/assets/gallery/poster_1.png" />
+          </div>
+          <div class="style_card">
+            <div class="style_card_ratting"><p>9.8</p></div>
+            <div class="style_card_name"><p>Проклятое королевство</p></div>
+            <img src="/assets/gallery/poster_1.png" />
+          </div>
+          <div class="style_card">
+            <div class="style_card_ratting"><p>9.8</p></div>
+            <div class="style_card_name"><p>Проклятое королевство</p></div>
+            <img src="/assets/gallery/poster_1.png" />
+          </div>
+          <div class="style_card">
+            <div class="style_card_ratting"><p>9.8</p></div>
+            <div class="style_card_name"><p>Проклятое королевство</p></div>
+            <img src="/assets/gallery/poster_1.png" />
+          </div>
+          <div class="style_card">
+            <div class="style_card_ratting"><p>9.8</p></div>
+            <div class="style_card_name"><p>Проклятое королевство</p></div>
+            <img src="/assets/gallery/poster_1.png" />
+          </div>
+        </div>
+      </div>
+      <button class="slider-btn prev-btn">
+        <img src="/assets/icons/arrow_slider_active.svg" />
+      </button>
+      <button class="slider-btn next-btn">
+        <img class="light-icon" src="/assets/icons/arrow_slider_active.svg" />
+        <img class="dark-icon" src="/assets/icons/light_arrow_slider.svg" />
+      </button>
     </section>
 
     <footer>

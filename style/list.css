@@ -119,7 +119,7 @@
   display: none;
 }
 
-.sidebar {
+.sidebarFilter {
   position: sticky;
   top: 0;
   left: 0;
@@ -230,7 +230,7 @@
 }
 
 @media (max-width: 800px) {
-  .sidebar {
+  .sidebarFilter {
     width: 100%;
     order: -1;
     padding: 35px 50px 100px 30px;

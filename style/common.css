@@ -418,15 +418,16 @@ footer p {
 
 .prev-btn {
   position: absolute;
-  left: 20px; /* Отступ от края галереи */
+  left: 40px; /* Отступ от края галереи */
   top: 50%;
   transform: translateY(-50%);
+  transform: scaleX(-1);
 }
 
 .next-btn {
   position: absolute;
   right: 30px;
-  top: 50%;
+  top: 52.5%;
   transform: translateY(-50%);
 }
 
@@ -658,6 +659,7 @@ footer p {
 
   .prev-btn {
     left: 5px;
+    transform: scaleX(-1);
   }
 
   .next-btn {
