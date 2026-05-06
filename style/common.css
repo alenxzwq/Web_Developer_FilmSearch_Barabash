@@ -254,6 +254,12 @@ header {
   border-radius: 100px;
   cursor: pointer;
   white-space: nowrap;
+
+  transition: 0.5s;
+}
+
+.search_btn:hover {
+  background-color: var(--hoverBtn);
 }
 
 footer {
@@ -281,6 +287,17 @@ footer p {
 .social_media {
   display: flex;
   gap: 20px;
+}
+
+.social_media svg,
+.social_media svg * {
+  fill: #ffffff;
+  transition: 0.2s;
+}
+
+.social_media svg:hover,
+.social_media svg:hover * {
+  fill: #855bfc;
 }
 
 .style_card {
