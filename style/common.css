@@ -351,6 +351,10 @@ footer p {
   z-index: 3;
 }
 
+.style_card_ratting.rating-low {
+  background-color: #ffaf37;
+}
+
 .style_card_ratting p {
   font-family: "Inter";
   font-weight: 700;
