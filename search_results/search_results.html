@@ -60,105 +60,12 @@
       </div>
     </div>
 
-    <section class="search">
-      <div class="search_container">
-        <div class="search_icon">
-          <img src="/assets/icons/search.svg" alt="Search" />
-        </div>
-        <input
-          class="search-input"
-          type="text"
-          placeholder="Что сегодня посмотреть?"
-        />
-        <button class="search_btn">Найти</button>
-      </div>
-    </section>
-
     <section class="movies_page">
-      <aside class="sidebarFilter">
-        <div class="sidebar_filters">
-          <h1 class="sidebar_heading">Сериалы</h1>
-          <div class="filter_group">
-            <label>Жанр</label>
-            <div class="select_container">
-              <select class="style_select">
-                <option>Все жанры</option>
-                <option>Боевик</option>
-                <option>Комедия</option>
-                <option>Драма</option>
-                <option>Фантастика</option>
-              </select>
-              <img
-                class="select_arrow"
-                src="/assets/icons/selected_arrow.svg"
-              />
-            </div>
-          </div>
-
-          <div class="filter_group">
-            <label>Рейтинг</label>
-            <div class="select_container">
-              <select class="style_select">
-                <option>Все жанры</option>
-                <option>Боевик</option>
-                <option>Комедия</option>
-                <option>Драма</option>
-                <option>Фантастика</option>
-              </select>
-              <img
-                class="select_arrow"
-                src="/assets/icons/selected_arrow.svg"
-              />
-            </div>
-          </div>
-
-          <div class="filter_group">
-            <label>Страна</label>
-            <div class="select_container">
-              <select class="style_select">
-                <option>Все жанры</option>
-                <option>Боевик</option>
-                <option>Комедия</option>
-                <option>Драма</option>
-                <option>Фантастика</option>
-              </select>
-              <img
-                class="select_arrow"
-                src="/assets/icons/selected_arrow.svg"
-              />
-            </div>
-          </div>
-
-          <div class="filter_group">
-            <label>Год выпуска</label>
-            <div class="select_container">
-              <select class="style_select">
-                <option>Все жанры</option>
-                <option>Боевик</option>
-                <option>Комедия</option>
-                <option>Драма</option>
-                <option>Фантастика</option>
-              </select>
-              <img
-                class="select_arrow"
-                src="/assets/icons/selected_arrow.svg"
-              />
-            </div>
-          </div>
-        </div>
-      </aside>
-
       <main class="main-content">
         <div class="content_header">
-          <h1>Сериалы</h1>
+          <h1 id="pageTitle">Результаты поиска</h1>
 
-          <div class="pages">
-            <span class="active">1</span>
-            <span>2</span>
-            <span>3</span>
-            <span>4</span>
-            <span>5</span>
-          </div>
+          <div class="pages"></div>
         </div>
 
         <div class="movies_grid">

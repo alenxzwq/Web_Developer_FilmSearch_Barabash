@@ -239,7 +239,7 @@ header {
   padding: 0 30px;
 }
 
-.search_container input {
+.search-input {
   flex: 1;
   border: none;
   padding: 12px 0;
@@ -249,7 +249,7 @@ header {
   min-width: 0;
 }
 
-.search_container input::placeholder {
+.search-input::placeholder {
   color: var(--black);
   font-size: 24px;
   font-weight: 600;
