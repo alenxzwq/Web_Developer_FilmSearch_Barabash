@@ -2,6 +2,10 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'unsafe-inline' 'unsafe-eval' *;"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
@@ -65,7 +69,11 @@
         <div class="search_icon">
           <img src="/assets/icons/search.svg" alt="Search" />
         </div>
-        <input type="text" placeholder="Что сегодня посмотреть?" />
+        <input
+          class="search-input"
+          type="text"
+          placeholder="Что сегодня посмотреть?"
+        />
         <button class="search_btn">Найти</button>
       </div>
     </section>
@@ -123,12 +131,17 @@
 
     <section class="video">
       <h1 class="video_heading">Трейлер</h1>
-      <video controls>
-        <source
-          src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
-          type="video/mp4"
-        />
-      </video>
+      <div class="video-container">
+        <iframe
+          id="trailerIframe"
+          width="100%"
+          height="400"
+          src=""
+          frameborder="0"
+          allowfullscreen
+        >
+        </iframe>
+      </div>
     </section>
 
     <section class="photos">
