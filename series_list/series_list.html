@@ -77,16 +77,18 @@
     <section class="movies_page">
       <aside class="sidebarFilter">
         <div class="sidebar_filters">
-          <h1 class="sidebar_heading">Сериалы</h1>
+          <h1 class="sidebar_heading">Фильмы</h1>
           <div class="filter_group">
             <label>Жанр</label>
             <div class="select_container">
-              <select class="style_select">
-                <option>Все жанры</option>
-                <option>Боевик</option>
-                <option>Комедия</option>
-                <option>Драма</option>
-                <option>Фантастика</option>
+              <select id="genreFilter" class="style_select">
+                <option value="">Все жанры</option>
+                <option value="боевик">Боевик</option>
+                <option value="комедия">Комедия</option>
+                <option value="драма">Драма</option>
+                <option value="фантастика">Фантастика</option>
+                <option value="триллер">Триллер</option>
+                <option value="ужасы">Ужасы</option>
               </select>
               <img
                 class="select_arrow"
@@ -98,12 +100,12 @@
           <div class="filter_group">
             <label>Рейтинг</label>
             <div class="select_container">
-              <select class="style_select">
-                <option>Все жанры</option>
-                <option>Боевик</option>
-                <option>Комедия</option>
-                <option>Драма</option>
-                <option>Фантастика</option>
+              <select id="ratingFilter" class="style_select">
+                <option value="">Выбрать рейтинг</option>
+                <option value="9">От 9</option>
+                <option value="8">От 8</option>
+                <option value="7">От 7</option>
+                <option value="6">От 6</option>
               </select>
               <img
                 class="select_arrow"
@@ -115,12 +117,13 @@
           <div class="filter_group">
             <label>Страна</label>
             <div class="select_container">
-              <select class="style_select">
-                <option>Все жанры</option>
-                <option>Боевик</option>
-                <option>Комедия</option>
-                <option>Драма</option>
-                <option>Фантастика</option>
+              <select id="countryFilter" class="style_select">
+                <option value="">Все страны</option>
+                <option value="США">США</option>
+                <option value="Россия">Россия</option>
+                <option value="Великобритания">Великобритания</option>
+                <option value="Франция">Франция</option>
+                <option value="Япония">Япония</option>
               </select>
               <img
                 class="select_arrow"
@@ -132,12 +135,18 @@
           <div class="filter_group">
             <label>Год выпуска</label>
             <div class="select_container">
-              <select class="style_select">
-                <option>Все жанры</option>
-                <option>Боевик</option>
-                <option>Комедия</option>
-                <option>Драма</option>
-                <option>Фантастика</option>
+              <select id="yearFilter" class="style_select">
+                <option value="">Все годы</option>
+                <option value="2026">2026</option>
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
               </select>
               <img
                 class="select_arrow"

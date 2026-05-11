@@ -4,6 +4,8 @@ const API_CONFIG = {
   API_KEY: "83208d21-5ac5-47d5-9713-65a362bc9fc7",
 };
 
+let originalMovies = [];
+
 async function getContent(type = "FILM", page = 1, limit = 100) {
   let url = "";
 
@@ -349,6 +351,8 @@ async function loadRandomMovies(type = "FILM") {
     return;
   }
 
+  originalMovies = [...items];
+
   // Перемешиваем в случайном порядке
   for (let i = items.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -364,6 +368,89 @@ async function loadRandomMovies(type = "FILM") {
   pgItems = items.slice(0, 50);
   pgPage = 1;
   pgShow();
+}
+
+function applyFilters() {
+  const year = document.getElementById("yearFilter").value;
+  const genre = document.getElementById("genreFilter").value;
+  const country = document.getElementById("countryFilter").value;
+  const rating = document.getElementById("ratingFilter").value;
+
+  let filtered = [...originalMovies];
+
+  if (year && year !== "") {
+    const yearNum = parseInt(year);
+    filtered = filtered.filter((movie) => {
+      // Преобразуем год фильма в число для сравнения
+      const movieYear = parseInt(movie.year);
+      return movieYear === yearNum;
+    });
+    console.log(
+      `После фильтра по году ${yearNum}: осталось ${filtered.length} фильмов`,
+    );
+  }
+
+  if (genre && genre !== "") {
+    filtered = filtered.filter((movie) => {
+      // Проверяем, есть ли выбранный жанр в массиве жанров фильма
+      return movie.genres?.some(
+        (g) => g.genre.toLowerCase() === genre.toLowerCase(),
+      );
+    });
+  }
+
+  // Фильтр по стране (аналогично жанру)
+  if (country && country !== "") {
+    filtered = filtered.filter((movie) => {
+      return movie.countries?.some((c) =>
+        c.country.toLowerCase().includes(country.toLowerCase()),
+      );
+    });
+  }
+
+  // Фильтр по рейтингу
+  if (rating && rating !== "") {
+    const minRating = parseInt(rating);
+    filtered = filtered.filter((movie) => (movie.rating || 0) >= minRating);
+  }
+
+  if (filtered.length === 0) {
+    console.log("❌ Фильмов не найдено!");
+    const container = document.querySelector(".movies_grid");
+    container.innerHTML =
+      "<div style='text-align:center; padding:20px;'>По выбранным фильтрам ничего не найдено</div>";
+    return;
+  }
+
+  pgItems = filtered;
+  pgPage = 1;
+  pgShow();
+
+  // 5. Сообщаем результат
+  console.log(`Найдено фильмов: ${filtered.length}`);
+}
+
+function autoFilter() {
+  const filters = [
+    "yearFilter",
+    "genreFilter",
+    "countryFilter",
+    "ratingFilter",
+  ];
+
+  filters.forEach((filterId) => {
+    const element = document.getElementById(filterId);
+    if (element) {
+      element.addEventListener("change", () => {
+        applyFilters();
+      });
+    }
+  });
+}
+
+const applyBtn = document.getElementById("applyFilter");
+if (applyBtn) {
+  applyBtn.addEventListener("click", applyFilters);
 }
 
 // ========== ОСНОВНАЯ ЗАГРУЗКА (упрощённая) ==========
@@ -394,3 +481,4 @@ if (!isSearchMode) {
 
 // Запускаем обработчик поиска
 setupSearch();
+autoFilter();
