@@ -148,6 +148,10 @@ header {
   display: none;
 }
 
+.active_header {
+  color: #9e9e9e;
+}
+
 .sidebar {
   position: fixed;
   top: 0;

@@ -184,6 +184,13 @@
   font-size: 20px;
 }
 
+.style_select option {
+  background-color: #cfcfcf; /* Цвет фона опции */
+  color: #000000; /* Цвет текста */
+  padding: 12px; /* Отступы (работает не везде) */
+  font-size: 16px;
+}
+
 .styled_select::-ms-expand {
   display: none;
 }
@@ -199,10 +206,6 @@
 
 .select_arrow.rotated {
   transform: translateY(-50%) rotate(180deg);
-}
-
-.filter_group select option {
-  background: #1a1a2e;
 }
 
 .pages {

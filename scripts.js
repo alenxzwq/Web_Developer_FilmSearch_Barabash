@@ -275,3 +275,26 @@ burger.addEventListener("click", () => {
 close.addEventListener("click", () => {
   menu.classList.remove("active");
 });
+
+document.querySelectorAll(".style_select").forEach((select) => {
+  const container = select.parentElement;
+  const arrow = container.querySelector(".select_arrow");
+  let isOpen = false;
+
+  if (!arrow) return;
+
+  select.addEventListener("mousedown", () => {
+    isOpen = !isOpen;
+    arrow.classList.toggle("rotated", isOpen);
+  });
+
+  select.addEventListener("blur", () => {
+    isOpen = false;
+    arrow.classList.remove("rotated");
+  });
+
+  select.addEventListener("change", () => {
+    isOpen = false;
+    arrow.classList.remove("rotated");
+  });
+});

@@ -16,11 +16,17 @@
   </head>
   <body>
     <header>
-      <img class="header_logo" src="/assets/icons/logo.svg" />
+      <a href="/index.html"
+        ><img class="header_logo" src="/assets/icons/logo.svg"
+      /></a>
       <nav class="header_navigation">
         <ul class="header_list">
-          <li class="header_list_point"><a></a>Фильмы</li>
-          <li class="header_list_point">Сериалы</li>
+          <li class="header_list_point">
+            <a href="/movie_list/movie_list.html">Фильмы</a>
+          </li>
+          <li class="header_list_point">
+            <a href="/series_list/series_list.html">Сериалы</a>
+          </li>
         </ul>
       </nav>
       <div class="switch_theme">
@@ -48,8 +54,12 @@
       />
       <nav class="sidebar_navigation">
         <ul class="sidebar_list">
-          <li class="sidebar_list_point"><a></a>Фильмы</li>
-          <li class="sidebar_list_point">Сериалы</li>
+          <li class="sidebar_list_point">
+            <a href="/movie_list/movie_list.html">Фильмы</a>
+          </li>
+          <li class="sidebar_list_point">
+            <a href="/series_list/series_list.html">Сериалы</a>
+          </li>
         </ul>
       </nav>
 
@@ -57,8 +67,12 @@
         <p>Тёмная тема</p>
         <button id="toggleBtnMobile">
           <img
-            class="sidebar_theme_icon"
+            class="sidebar_theme_icon light-toggle"
             src="/assets/icons/switch_light.svg"
+          />
+          <img
+            class="sidebar_theme_icon dark-toggle"
+            src="/assets/icons/switch_dark.svg"
           />
         </button>
       </div>
