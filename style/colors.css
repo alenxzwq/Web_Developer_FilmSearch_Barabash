@@ -1,3 +1,4 @@
+/* базовые цвета и цвета для светлой темы */
 :root {
   --bg-color: #ffffff;
   --text-color: #010101;
@@ -11,6 +12,7 @@
   --gray: #c0c0c0;
 }
 
+/* цвета для тёмной темы */
 :root.dark-theme {
   --bg-color: #1a1a1a;
   --text-color: #ffffff;

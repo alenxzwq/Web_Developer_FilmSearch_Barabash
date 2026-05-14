@@ -1,3 +1,4 @@
+/*------------------------------ стили страницы списков фильма/сериала ---------------------------------*/
 .movies_page {
   display: flex;
   min-height: 100vh;
@@ -10,7 +11,6 @@
   overflow-y: auto;
 }
 
-/* Хедер контента */
 .content_header {
   display: flex;
   justify-content: space-between;
@@ -55,8 +55,9 @@
   color: white;
   cursor: pointer;
 }
+/*------------------------------------------------------------------------------------*/
 
-/* Сетка фильмов */
+/*------------------------------ стили для сетки фильмов ---------------------------------*/
 .movies_grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -66,7 +67,6 @@
   margin-bottom: 150px;
 }
 
-/* Карточка фильма */
 .movie_card {
   background: #1a1a2e;
   border-radius: 15px;
@@ -185,9 +185,9 @@
 }
 
 .style_select option {
-  background-color: #cfcfcf; /* Цвет фона опции */
-  color: #000000; /* Цвет текста */
-  padding: 12px; /* Отступы (работает не везде) */
+  background-color: #cfcfcf;
+  color: #000000;
+  padding: 12px;
   font-size: 16px;
 }
 
@@ -231,6 +231,8 @@
 .sidebar_heading {
   display: none;
 }
+
+/*------------------------------------------------------------------------------------*/
 
 @media (max-width: 800px) {
   .sidebarFilter {

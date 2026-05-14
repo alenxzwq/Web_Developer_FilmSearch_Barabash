@@ -1,21 +1,23 @@
-// ============================================
-// 1. КОНФИГИ И ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
-// ============================================
+// 1. КОНФИГУРАЦИЯ API
 
+// Базовые настройки для работы с API Кинопоиска
 const API_CONFIG = {
   BASE_URL: "https://kinopoiskapiunofficial.tech/api",
   API_KEY: "d90bf8d1-e283-426b-a2bf-e10ae8f6e6b8",
 };
 
-let currentMovieList = []; // было pgItems
-let currentPage = 1; // было pgPage
-const PAGINATION_LIMIT = 9; // было pgLimit
+// 2. ГЛОБАЛЬНОЕ СОСТОЯНИЕ ПРИЛОЖЕНИЯ
+let currentMovieList = []; // Текущий список фильмов для отображения
+let currentPage = 1; // Текущая страница пагинации
+const PAGINATION_LIMIT = 9; // Количество фильмов на одной странице
 
-// ============================================
-// 2. ВСПОМОГАТЕЛЬНЫЕ УТИЛИТЫ
-// ============================================
-
-// Единый метод для API-запросов
+// 3. ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+/**
+ * Универсальный метод для API-запросов
+ * @param {string} url - URL для запроса
+ * @returns {Promise<Object>} - Promise с данными ответа
+ * @throws {Error} - Если запрос не удался
+ */
 async function apiRequest(url) {
   const response = await fetch(url, {
     method: "GET",
@@ -32,19 +34,31 @@ async function apiRequest(url) {
   return response.json();
 }
 
-// Отображение загрузки
+/**
+ * Отображает индикатор загрузки в контейнере
+ * @param {HTMLElement} container - DOM-элемент для отображения
+ * @param {string} message - Текст загрузки
+ */
 function showLoading(container, message = "Загрузка...") {
   if (!container) return;
   container.innerHTML = `<div class="loading-message">${message}</div>`;
 }
 
-// Отображение ошибки
+/**
+ * Отображает сообщение об ошибке
+ * @param {HTMLElement} container - DOM-элемент для отображения
+ * @param {string} message - Текст ошибки
+ */
 function showError(container, message = "Ошибка загрузки") {
   if (!container) return;
   container.innerHTML = `<div class="error-message">${message}</div>`;
 }
 
-// Экранирование HTML для безопасности
+/**
+ * Экранирует HTML-теги для предотвращения XSS-атак
+ * @param {string} text - Исходный текст
+ * @returns {string} - Безопасный текст
+ */
 function escapeHtml(text) {
   if (!text) return "";
   const div = document.createElement("div");
@@ -52,7 +66,11 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
-// Получение рейтинга из объекта фильма
+/**
+ * Извлекает числовое значение рейтинга из объекта фильма
+ * @param {Object} film - Объект фильма
+ * @returns {number} - Числовой рейтинг (0 если нет)
+ */
 function getRatingValue(film) {
   const rating = film.rating;
   if (rating === undefined || rating === null || isNaN(parseFloat(rating))) {
@@ -61,7 +79,12 @@ function getRatingValue(film) {
   return parseFloat(rating);
 }
 
-// Форматирование текста отзыва (обрезаем до maxLength)
+/**
+ * Обрезает длинный текст до указанной длины (по словам)
+ * @param {string} text - Исходный текст
+ * @param {number} maxLength - Максимальная длина
+ * @returns {string} - Обрезанный текст с многоточием
+ */
 function truncateText(text, maxLength = 300) {
   if (!text || text.length <= maxLength) return text;
 
@@ -73,18 +96,29 @@ function truncateText(text, maxLength = 300) {
   return cutText + "...";
 }
 
-// ============================================
-// 3. API ЗАПРОСЫ
-// ============================================
-
+// 4. API ЗАПРОСЫ К КИНОПОИСКУ
+/**
+ * Формирует URL для запроса в зависимости от типа контента
+ * @param {string} type - Тип контента: "FILM" или "SERIES"
+ * @param {number} page - Номер страницы
+ * @returns {string} - Сформированный URL
+ */
 function buildContentUrl(type, page) {
   const urls = {
     FILM: `${API_CONFIG.BASE_URL}/v2.2/films/top?type=TOP_100_POPULAR_FILMS&page=${page}`,
+
     SERIES: `${API_CONFIG.BASE_URL}/v2.2/films?order=RATING&type=TV_SERIES&ratingFrom=7&page=${page}`,
   };
   return urls[type] || urls.FILM;
 }
 
+/**
+ * Загружает контент (фильмы или сериалы) с пагинацией
+ * @param {string} type - Тип контента
+ * @param {number} page - Номер страницы
+ * @param {number} limit - Лимит элементов
+ * @returns {Promise<Array>} - Массив фильмов
+ */
 async function getContent(type = "FILM", page = 1, limit = 100) {
   const url = buildContentUrl(type, page);
 
@@ -92,7 +126,6 @@ async function getContent(type = "FILM", page = 1, limit = 100) {
     const data = await apiRequest(url);
     let results = data.films || data.items || [];
 
-    // Если нужно больше фильмов, загружаем дополнительные страницы
     if (results.length < limit && page < 3) {
       const nextPage = await getContent(type, page + 1, limit - results.length);
       results = [...results, ...nextPage];
@@ -105,6 +138,11 @@ async function getContent(type = "FILM", page = 1, limit = 100) {
   }
 }
 
+/**
+ * Поиск фильмов/сериалов по ключевому слову
+ * @param {string} query - Поисковый запрос
+ * @returns {Promise<Array>} - Массив найденных фильмов
+ */
 async function searchContent(query) {
   if (!query || query.trim() === "") return [];
 
@@ -119,6 +157,12 @@ async function searchContent(query) {
   }
 }
 
+/**
+ * Фильтрует контент по типу (фильмы/сериалы)
+ * @param {Array} items - Массив элементов
+ * @param {string} type - Тип фильтрации
+ * @returns {Array} - Отфильтрованный массив
+ */
 function filterByType(items, type) {
   if (type === "FILM") {
     return items.filter((item) => item.type !== "TV_SERIES");
@@ -128,23 +172,28 @@ function filterByType(items, type) {
   return items;
 }
 
-// ============================================
-// 4. UI КОМПОНЕНТЫ
-// ============================================
-
+// 5. UI КОМПОНЕНТЫ И КАРТОЧКИ
+/**
+ * Создаёт DOM-элемент карточки фильма
+ * @param {Object} film - Объект фильма
+ * @returns {HTMLElement} - Готовая карточка для вставки в DOM
+ */
 function createMovieCard(film) {
   const card = document.createElement("div");
   card.className = "style_card";
 
+  // Обработка рейтинга
   const rating = getRatingValue(film);
   const ratingText = rating === 0 ? "Нет" : rating.toFixed(1);
   const ratingClass = rating !== 0 && rating < 8.6 ? "rating-low" : "";
 
+  // Обработка названия и постера
   const title =
     film.nameRu || film.nameEn || film.nameOriginal || "Название неизвестно";
   const posterUrl =
     film.posterUrlPreview || film.posterUrl || "/assets/gallery/poster_1.png";
 
+  // Формируем HTML карточки
   card.innerHTML = `
     <div class="style_card_ratting ${ratingClass}">
       <p>${escapeHtml(ratingText)}</p>
@@ -155,6 +204,7 @@ function createMovieCard(film) {
     <img src="${posterUrl}" alt="${escapeHtml(title)}" onerror="this.src='/assets/gallery/poster_1.png'" />
   `;
 
+  // Клик по карточке
   card.addEventListener("click", () => {
     const filmId = film.kinopoiskId || film.filmId;
     if (filmId) {
@@ -167,10 +217,12 @@ function createMovieCard(film) {
   return card;
 }
 
-// ============================================
-// 5. СЛАЙДЕР (новая функция)
-// ============================================
-
+/**
+ * Загружает фильмы в указанный контейнер (используется для слайдера)
+ * @param {string} containerSelector - CSS-селектор контейнера
+ * @param {string} type - Тип контента ("FILM" или "SERIES")
+ * @param {number} limit - Максимальное количество фильмов
+ */
 async function loadMovies(containerSelector, type = "FILM", limit = 20) {
   const container = document.querySelector(containerSelector);
   if (!container) return;
@@ -192,16 +244,18 @@ async function loadMovies(containerSelector, type = "FILM", limit = 20) {
     return;
   }
 
+  // Отрисовка карточек
   container.innerHTML = "";
   items.slice(0, limit).forEach((item) => {
     container.appendChild(createMovieCard(item));
   });
 }
 
-// ============================================
-// 6. ПАГИНАЦИЯ ДЛЯ СЕТКИ
-// ============================================
-
+// 6. ПАГИНАЦИЯ ДЛЯ ОСНОВНОГО СПИСКА
+/**
+ * Обновляет отображение кнопок страниц
+ * Кнопки создаются динамически на основе количества страниц
+ */
 function updatePaginationDisplay() {
   const pagesDiv = document.querySelector(".pages");
   if (!pagesDiv) return;
@@ -216,6 +270,7 @@ function updatePaginationDisplay() {
   pagesDiv.style.display = "flex";
   pagesDiv.innerHTML = "";
 
+  // Создаём кнопки для каждой страницы
   for (let i = 1; i <= total; i++) {
     const btn = document.createElement("span");
     btn.innerText = i;
@@ -230,6 +285,10 @@ function updatePaginationDisplay() {
   }
 }
 
+/**
+ * Отображает текущую страницу с фильмами
+ * Использует глобальные переменные currentMovieList и currentPage
+ */
 function showCurrentPage() {
   const container = document.querySelector(".movies_grid");
   if (!container) return;
@@ -246,10 +305,12 @@ function showCurrentPage() {
   updatePaginationDisplay();
 }
 
-// ============================================
-// 7. ПОИСК И ФИЛЬТРАЦИЯ
-// ============================================
-
+// 7. ПОИСК И ОБРАБОТКА URL-ПАРАМЕТРОВ
+/**
+ * Выполняет поиск по запросу и обновляет список фильмов
+ * @param {string} query - Поисковый запрос
+ * @param {string} searchType - Тип поиска ("FILM", "SERIES", "MIXED")
+ */
 async function performSearch(query, searchType = "MIXED") {
   const container = document.querySelector(".movies_grid");
   if (!container) return;
@@ -276,6 +337,11 @@ async function performSearch(query, searchType = "MIXED") {
   showCurrentPage();
 }
 
+/**
+ * Обновляет слайдер результатами поиска
+ * @param {string} query - Поисковый запрос
+ * @param {string} type - Тип контента
+ */
 async function reloadSliderWithSearch(query, type = "FILM") {
   const sliderTrack = document.querySelector(".slider_track");
   if (!sliderTrack) return;
@@ -297,6 +363,9 @@ async function reloadSliderWithSearch(query, type = "FILM") {
   });
 }
 
+/**
+ * Настраивает обработчики поисковой строки
+ */
 function setupSearch() {
   const searchInput = document.querySelector(".search-input");
   const searchBtn = document.querySelector(".search_btn");
@@ -310,6 +379,7 @@ function setupSearch() {
     const currentPath = window.location.pathname;
     let searchUrl = "/search_results/search_results.html";
 
+    // Определяем правильную страницу
     if (currentPath.includes("search_results")) {
       searchUrl = "/search_results.html";
     } else if (currentPath.includes("movie_list")) {
@@ -327,10 +397,13 @@ function setupSearch() {
   });
 }
 
-// ============================================
-// 8. ФИЛЬТРЫ
-// ============================================
-
+// 8. ФИЛЬТРАЦИЯ КОНТЕНТА
+/**
+ * Фильтрация по году выпуска
+ * @param {Array} movies - Массив фильмов
+ * @param {string} year - Год для фильтрации
+ * @returns {Array} - Отфильтрованный массив
+ */
 function filterByYear(movies, year) {
   if (!movies || !Array.isArray(movies)) return [];
   if (!year || year === "") return movies;
@@ -338,6 +411,12 @@ function filterByYear(movies, year) {
   return movies.filter((movie) => parseInt(movie.year) === yearNum);
 }
 
+/**
+ * Фильтрация по жанру
+ * @param {Array} movies - Массив фильмов
+ * @param {string} genre - Жанр для фильтрации
+ * @returns {Array} - Отфильтрованный массив
+ */
 function filterByGenre(movies, genre) {
   if (!movies || !Array.isArray(movies)) return [];
   if (!genre || genre === "") return movies;
@@ -346,6 +425,12 @@ function filterByGenre(movies, genre) {
   );
 }
 
+/**
+ * Фильтрация по стране
+ * @param {Array} movies - Массив фильмов
+ * @param {string} country - Страна для фильтрации
+ * @returns {Array} - Отфильтрованный массив
+ */
 function filterByCountry(movies, country) {
   if (!movies || !Array.isArray(movies)) return [];
   if (!country || country === "") return movies;
@@ -356,17 +441,28 @@ function filterByCountry(movies, country) {
   );
 }
 
+/**
+ * Фильтрация по минимальному рейтингу
+ * @param {Array} movies - Массив фильмов
+ * @param {string} minRating - Минимальный рейтинг
+ * @returns {Array} - Отфильтрованный массив
+ */
 function filterByRating(movies, minRating) {
   if (!movies || !Array.isArray(movies)) return [];
   if (!minRating || minRating === "") return movies;
   return movies.filter((movie) => (movie.rating || 0) >= parseInt(minRating));
 }
 
+/**
+ * Применяет все активные фильтры к текущему списку
+ * Вызывается при изменении любого фильтра
+ */
 function applyFilters() {
   const year = document.getElementById("yearFilter")?.value;
   const genre = document.getElementById("genreFilter")?.value;
   const country = document.getElementById("countryFilter")?.value;
   const rating = document.getElementById("ratingFilter")?.value;
+
   if (typeof window.originalMovies === "undefined") {
     console.warn("originalMovies не определена");
     return;
@@ -394,6 +490,10 @@ function applyFilters() {
   console.log(`Найдено фильмов: ${filtered.length}`);
 }
 
+/**
+ * Навешивает обработчики на элементы фильтров
+ * При изменении значения фильтра автоматически применяются все фильтры
+ */
 function autoFilter() {
   const filters = [
     "yearFilter",
@@ -409,10 +509,12 @@ function autoFilter() {
   });
 }
 
-// ============================================
-// 9. СЛУЧАЙНЫЕ ФИЛЬМЫ ДЛЯ СЕТКИ
-// ============================================
-
+// 9. ЗАГРУЗКА СЛУЧАЙНЫХ ФИЛЬМОВ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ
+/**
+ * Загружает случайные фильмы для отображения в основном списке
+ * Перемешивает массив и сортирует по рейтингу
+ * @param {string} type - Тип контента ("FILM" или "SERIES")
+ */
 async function loadRandomMovies(type = "FILM") {
   const container = document.querySelector(".movies_grid");
   if (!container) return;
@@ -426,16 +528,15 @@ async function loadRandomMovies(type = "FILM") {
     return;
   }
 
-  // Сохраняем оригинальные фильмы для фильтров
+  // Сохраняем оригинальный список для фильтров
   window.originalMovies = [...items];
 
-  // Перемешиваем
   for (let i = items.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [items[i], items[j]] = [items[j], items[i]];
   }
 
-  // Сортируем по рейтингу
+  // Сортировка по убыванию рейтинга
   items.sort(
     (a, b) => (parseFloat(b.rating) || 0) - (parseFloat(a.rating) || 0),
   );
@@ -445,21 +546,22 @@ async function loadRandomMovies(type = "FILM") {
   showCurrentPage();
 }
 
-// ============================================
-// 10. СТРАНИЦА ФИЛЬМА
-// ============================================
-
+// 10. СТРАНИЦА ДЕТАЛЬНОГО ПРОСМОТРА ФИЛЬМА
+/**
+ * Загружает основную информацию о фильме и заполняет DOM
+ * @param {Object} film - Объект фильма
+ * @param {number} filmId - ID фильма
+ */
 async function loadFilmInfo(film, filmId) {
   const title =
     film.nameRu || film.nameEn || film.nameOriginal || "Название неизвестно";
 
-  // Заголовки
   const titleMobile = document.querySelector(".film_title_mobile");
   const titleDesktop = document.querySelector(".film_title");
   if (titleMobile) titleMobile.innerHTML = escapeHtml(title);
   if (titleDesktop) titleDesktop.innerHTML = escapeHtml(title);
 
-  // Рейтинг
+  // Обработка рейтинга и его стилизации
   const rating =
     film.ratingKinopoisk || film.ratingImdb || film.rating || "Нет";
   const ratingValue = rating === "Нет" ? 10 : parseFloat(rating);
@@ -472,7 +574,7 @@ async function loadFilmInfo(film, filmId) {
     if (ratingClass) ratingDiv.classList.add(ratingClass);
   }
 
-  // Постер
+  // Постер фильма
   const posterUrl =
     film.posterUrl || film.posterUrlPreview || "/assets/gallery/poster_1.png";
   const posterImg = document.querySelector(".film_poster img");
@@ -481,25 +583,22 @@ async function loadFilmInfo(film, filmId) {
     posterImg.alt = escapeHtml(title);
   }
 
-  // Жанры
+  // Информационные поля (жанры, страны, год, возрастной рейтинг)
   const genresSpan = document.querySelector(".film_item:first-child span");
   if (genresSpan && film.genres?.length) {
     genresSpan.innerHTML = film.genres.map((g) => g.genre).join(", ");
   }
 
-  // Страны
   const countrySpan = document.querySelector(".film_item:nth-child(2) span");
   if (countrySpan && film.countries?.length) {
     countrySpan.innerHTML = film.countries.map((c) => c.country).join(", ");
   }
 
-  // Дата релиза
   const releaseSpan = document.querySelector(".film_item:nth-child(5) span");
   if (releaseSpan && film.year) {
     releaseSpan.innerHTML = `${film.year} год`;
   }
 
-  // Возрастное ограничение
   const ageSpan = document.querySelector(".film_item:nth-child(6) span");
   if (ageSpan && film.ratingAgeLimits) {
     let age = film.ratingAgeLimits.replace("age", "");
@@ -507,12 +606,15 @@ async function loadFilmInfo(film, filmId) {
   }
 }
 
+/**
+ * Загружает актёров и режиссёров фильма
+ * @param {number} filmId - ID фильма
+ */
 async function loadStaff(filmId) {
   try {
     const staffUrl = `${API_CONFIG.BASE_URL}/v1/staff?filmId=${filmId}`;
     const staff = await apiRequest(staffUrl);
 
-    // Актёры
     const actorsSpan = document.querySelector(".film_item:nth-child(3) span");
     if (actorsSpan && staff?.length) {
       const actors = staff
@@ -525,7 +627,6 @@ async function loadStaff(filmId) {
       }
     }
 
-    // Режиссёры
     const directorsSpan = document.querySelector(
       ".film_item:nth-child(4) span",
     );
@@ -544,6 +645,11 @@ async function loadStaff(filmId) {
   }
 }
 
+/**
+ * Загружает и отображает трейлер фильма
+ * Поддерживает YouTube ссылки в разных форматах
+ * @param {Object} film - Объект фильма
+ */
 function loadTrailer(film) {
   const videoSection = document.querySelector(".video");
   if (!videoSection) return;
@@ -556,6 +662,7 @@ function loadTrailer(film) {
   }
 
   if (trailerUrl) {
+    // Конвертация разных форматов YouTube ссылок в embed-формат
     let embedUrl = trailerUrl;
     if (trailerUrl.includes("youtube.com/watch?v=")) {
       const videoId = trailerUrl.split("v=")[1].split("&")[0];
@@ -577,6 +684,10 @@ function loadTrailer(film) {
   }
 }
 
+/**
+ * Загружает кадры из фильма (скриншоты) в слайдер
+ * @param {number} filmId - ID фильма
+ */
 async function loadFilmImages(filmId) {
   const photosSection = document.querySelector(".photos");
   const photosTrack = document.querySelector(".photos_slider_track");
@@ -598,7 +709,6 @@ async function loadFilmImages(filmId) {
         photosTrack.appendChild(card);
       });
 
-      // Показываем кнопки
       const prevBtn = document.querySelector(".photos-prev-btn");
       const nextBtn = document.querySelector(".photos-next-btn");
       if (prevBtn) prevBtn.style.display = "flex";
@@ -619,6 +729,10 @@ async function loadFilmImages(filmId) {
   }
 }
 
+/**
+ * Загружает отзывы на фильм (до 2 штук)
+ * @param {number} filmId - ID фильма
+ */
 async function loadReviews(filmId) {
   const reviewContainer = document.querySelector(".review_container");
   if (!reviewContainer) return;
@@ -648,6 +762,7 @@ async function loadReviews(filmId) {
         review.description || review.review || "Нет текста отзыва";
       const shortText = truncateText(reviewText);
 
+      // Конвертация типа отзыва в звёзды
       const reviewType = review.type;
       let ratingValue = 0;
       if (reviewType === "POSITIVE") ratingValue = 10;
@@ -685,13 +800,17 @@ async function loadReviews(filmId) {
   }
 }
 
+/**
+ * Настраивает навигацию в слайдере кадров
+ * При клике на кнопки происходит плавная прокрутка
+ */
 function setupPhotosSlider() {
   const track = document.querySelector(".photos_slider_track");
   const prevBtn = document.querySelector(".photos-prev-btn");
   const nextBtn = document.querySelector(".photos-next-btn");
 
   if (track && prevBtn && nextBtn) {
-    const scrollAmount = 320;
+    const scrollAmount = 320; // Ширина карточки + отступ
     prevBtn.addEventListener("click", () =>
       track.scrollBy({ left: -scrollAmount, behavior: "smooth" }),
     );
@@ -701,6 +820,10 @@ function setupPhotosSlider() {
   }
 }
 
+/**
+ * Главная функция загрузки страницы фильма
+ * Определяет ID из URL и последовательно загружает все данные
+ */
 async function loadFilmPage() {
   const urlParams = new URLSearchParams(window.location.search);
   const filmId = urlParams.get("id");
@@ -716,6 +839,7 @@ async function loadFilmPage() {
     const film = await apiRequest(filmUrl);
     console.log("Фильм загружен:", film);
 
+    // Последовательная загрузка всех данных
     await loadFilmInfo(film, filmId);
     await loadStaff(filmId);
     loadTrailer(film);
@@ -729,10 +853,12 @@ async function loadFilmPage() {
   }
 }
 
-// ============================================
-// 11. ОБРАБОТКА ПАРАМЕТРОВ ПОИСКА В URL
-// ============================================
-
+// 11. ОБРАБОТКА URL-ПАРАМЕТРОВ ПОИСКА
+/**
+ * Проверяет наличие параметра поиска в URL
+ * Если есть - выполняет поиск и обновляет страницу
+ * @returns {boolean} - Был ли выполнен поиск
+ */
 function checkSearchParam() {
   const urlParams = new URLSearchParams(window.location.search);
   const searchQuery = urlParams.get("search");
@@ -749,75 +875,58 @@ function checkSearchParam() {
     searchType = "SERIES";
   }
 
-  // Обновляем заголовок
-  const h1 =
-    document.querySelector("#pageTitle") || document.querySelector("h1");
-  if (h1) h1.innerHTML = pageTitle;
-
-  // Выполняем поиск
+  // Выполняем поиск в основном списке и слайдере
   performSearch(searchQuery, searchType);
   reloadSliderWithSearch(searchQuery, searchType);
 
   return true;
 }
 
-// ============================================
-// 12. ИНИЦИАЛИЗАЦИЯ (ЗАВИСИТ ОТ СТРАНИЦЫ)
-// ============================================
-
+// 12. ИНИЦИАЛИЗАЦИЯ ПРИЛОЖЕНИЯ
+// Здесь определяется, на какой странице мы находимся
 const currentPath = window.location.pathname;
 const isMoviePage = currentPath.includes("movie.html");
 const isSeriesPage = currentPath.includes("series_list");
 const hasSearch = checkSearchParam();
 
 if (isMoviePage) {
-  // Загружаем страницу фильма
   loadFilmPage();
   setupSearch();
 } else {
-  // Загружаем основную страницу со списком фильмов
+  // Страница со списком фильмов/сериалов
   if (!hasSearch) {
     if (isSeriesPage) {
+      // Загрузка сериалов для основной сетки и слайдера
       loadRandomMovies("SERIES");
       loadMovies(".slider_track", "SERIES", 20);
     } else {
+      // Загрузка фильмов для основной сетки и слайдера
       loadRandomMovies("FILM");
       loadMovies(".slider_track", "FILM", 20);
     }
   }
-
-  // Запускаем обработчики
   setupSearch();
   autoFilter();
 }
 
-// ============================================
-// ЭКСПОРТ ДЛЯ ТЕСТИРОВАНИЯ
-// ============================================
-
+// 13. ЭКСПОРТ ДЛЯ ТЕСТИРОВАНИЯ
 if (typeof module !== "undefined" && module.exports) {
   module.exports = {
-    // Утилиты
     getRatingValue,
     truncateText,
     escapeHtml,
     filterByType,
-    // Фильтры
     filterByYear,
     filterByGenre,
     filterByCountry,
     filterByRating,
     applyFilters,
-    // API
     getContent,
     searchContent,
     apiRequest,
-    // UI
     createMovieCard,
-    // Пагинация
     showCurrentPage,
     updatePaginationDisplay,
-    // Поиск
     performSearch,
     checkSearchParam,
   };

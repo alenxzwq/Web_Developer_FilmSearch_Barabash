@@ -2,9 +2,7 @@
  * @jest-environment jsdom
  */
 
-// ============================================
 // 1. НАСТРОЙКА DOM ПЕРЕД ИМПОРТОМ
-// ============================================
 
 // Создаем полный DOM с необходимыми элементами
 beforeAll(() => {
@@ -53,11 +51,8 @@ beforeAll(() => {
   }
 });
 
-// ============================================
 // 2. НАСТРОЙКА МОКОВ
-// ============================================
-
-// ПРАВИЛЬНЫЙ мок для localStorage
+// мок для localStorage
 let store = {};
 const localStorageMock = {
   getItem: jest.fn((key) => store[key] || null),
@@ -94,10 +89,7 @@ global.getComputedStyle = jest.fn().mockImplementation(() => ({
   gap: "100px",
 }));
 
-// ============================================
 // 3. ИМПОРТ ФУНКЦИЙ
-// ============================================
-
 const {
   setTheme,
   toggleTheme,
@@ -105,12 +97,9 @@ const {
   UniversalSlider,
   initBurgerMenu,
   initSelects,
-} = require("../scripts");
+} = require("../script/scripts");
 
-// ============================================
 // 4. НАСТРОЙКА ПЕРЕД КАЖДЫМ ТЕСТОМ
-// ============================================
-
 beforeEach(() => {
   // Очищаем store
   store = {};
@@ -128,10 +117,7 @@ beforeEach(() => {
   if (toggleText) toggleText.textContent = "Тёмная тема";
 });
 
-// ============================================
 // 5. ТЕСТЫ ДЛЯ ТЕМЫ
-// ============================================
-
 describe("setTheme", () => {
   test("устанавливает тёмную тему", () => {
     setTheme("dark");
@@ -143,7 +129,6 @@ describe("setTheme", () => {
     const toggleText = document.getElementById("toggleText");
     expect(toggleText.textContent).toBe("Светлая тема");
 
-    // Проверяем вызов localStorage.setItem
     expect(localStorageMock.setItem).toHaveBeenCalledWith("theme", "dark");
     expect(localStorageMock.setItem).toHaveBeenCalledTimes(1);
   });
@@ -158,7 +143,6 @@ describe("setTheme", () => {
     const toggleText = document.getElementById("toggleText");
     expect(toggleText.textContent).toBe("Тёмная тема");
 
-    // Проверяем вызов localStorage.setItem
     expect(localStorageMock.setItem).toHaveBeenCalledWith("theme", "light");
     expect(localStorageMock.setItem).toHaveBeenCalledTimes(1);
   });
@@ -166,7 +150,6 @@ describe("setTheme", () => {
 
 describe("toggleTheme", () => {
   test("переключает тему со светлой на тёмную", () => {
-    // Мокаем contains для возврата false (светлая тема)
     document.documentElement.classList.contains.mockReturnValueOnce(false);
 
     toggleTheme();
@@ -178,7 +161,6 @@ describe("toggleTheme", () => {
   });
 
   test("переключает тему с тёмной на светлую", () => {
-    // Мокаем contains для возврата true (тёмная тема)
     document.documentElement.classList.contains.mockReturnValueOnce(true);
 
     toggleTheme();
@@ -204,10 +186,8 @@ describe("initTheme", () => {
   });
 
   test("использует системные настройки, если тема не сохранена", () => {
-    // localStorage.getItem возвращает null
     localStorageMock.getItem.mockReturnValueOnce(null);
 
-    // Мокаем matchMedia для возврата dark
     window.matchMedia.mockReturnValueOnce({
       matches: true,
       addEventListener: jest.fn(),
@@ -238,10 +218,7 @@ describe("initTheme", () => {
   });
 });
 
-// ============================================
 // 6. ТЕСТЫ ДЛЯ БУРГЕР-МЕНЮ
-// ============================================
-
 describe("Burger Menu", () => {
   test("бургер-меню инициализируется без ошибок", () => {
     expect(() => initBurgerMenu()).not.toThrow();
@@ -258,10 +235,7 @@ describe("Burger Menu", () => {
   });
 });
 
-// ============================================
 // 7. ТЕСТЫ ДЛЯ SELECT
-// ============================================
-
 describe("Selects", () => {
   test("инициализация selects не вызывает ошибок", () => {
     expect(() => initSelects()).not.toThrow();
@@ -273,10 +247,7 @@ describe("Selects", () => {
   });
 });
 
-// ============================================
 // 8. ТЕСТЫ ДЛЯ SLIDER
-// ============================================
-
 describe("UniversalSlider", () => {
   let sliderElement;
   let slider;
@@ -305,10 +276,7 @@ describe("UniversalSlider", () => {
   });
 });
 
-// ============================================
 // 9. ТЕСТЫ ДЛЯ ИНТЕГРАЦИИ
-// ============================================
-
 describe("Integration tests", () => {
   test("setTheme сохраняет тему в localStorage", () => {
     setTheme("dark");
@@ -329,10 +297,7 @@ describe("Integration tests", () => {
   });
 });
 
-// ============================================
 // 10. ДОПОЛНИТЕЛЬНЫЕ ТЕСТЫ
-// ============================================
-
 describe("DOM элементы", () => {
   test("кнопки темы существуют", () => {
     const toggleBtn = document.getElementById("toggleBtn");
@@ -347,10 +312,7 @@ describe("DOM элементы", () => {
   });
 });
 
-// ============================================
 // 11. ТЕСТЫ ДЛЯ ГРАНИЧНЫХ СЛУЧАЕВ
-// ============================================
-
 describe("Edge cases", () => {
   test("setTheme обрабатывает undefined тему", () => {
     expect(() => setTheme()).not.toThrow();
