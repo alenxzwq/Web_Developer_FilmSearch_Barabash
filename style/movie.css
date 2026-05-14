@@ -246,6 +246,8 @@ video {
 
   display: flex;
   flex-direction: column;
+
+  cursor: pointer;
 }
 
 .review_card h2 {

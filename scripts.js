@@ -1,20 +1,32 @@
-const root = document.documentElement;
-const toggleBtn = document.getElementById("toggleBtn");
-const toggleText = document.getElementById("toggleText");
-const toggleBtnMobile = document.getElementById("toggleBtnMobile");
+// ============================================
+// ПЕРЕМЕННЫЕ
+// ============================================
+let isOpen = false;
+let burger = null;
+let menu = null;
+let close = null;
 
+// ============================================
+// ФУНКЦИИ ТЕМЫ
+// ============================================
 function setTheme(theme) {
+  const root = document.documentElement;
+  const toggleText = document.getElementById("toggleText");
+  const toggleBtn = document.getElementById("toggleBtn");
+  const toggleBtnMobile = document.getElementById("toggleBtnMobile");
+
   if (theme === "dark") {
     root.classList.add("dark-theme");
-    toggleText.textContent = "Светлая тема";
+    if (toggleText) toggleText.textContent = "Светлая тема";
   } else {
     root.classList.remove("dark-theme");
-    toggleText.textContent = "Тёмная тема";
+    if (toggleText) toggleText.textContent = "Тёмная тема";
   }
   localStorage.setItem("theme", theme);
 }
 
 function toggleTheme() {
+  const root = document.documentElement;
   const currentTheme = root.classList.contains("dark-theme") ? "dark" : "light";
   setTheme(currentTheme === "dark" ? "light" : "dark");
 }
@@ -32,19 +44,70 @@ function initTheme() {
   }
 }
 
-toggleBtn.addEventListener("click", toggleTheme);
-toggleBtnMobile.addEventListener("click", toggleTheme);
+// ============================================
+// ФУНКЦИИ БУРГЕР-МЕНЮ
+// ============================================
+function initBurgerMenu() {
+  burger = document.getElementById("burger");
+  menu = document.getElementById("sidebar");
+  close = document.getElementById("close");
 
-initTheme();
+  if (burger) {
+    // Удаляем старые обработчики, если есть
+    const newBurger = burger.cloneNode(true);
+    burger.parentNode.replaceChild(newBurger, burger);
+    burger = newBurger;
 
-window
-  .matchMedia("(prefers-color-scheme: dark)")
-  .addEventListener("change", (e) => {
-    if (!localStorage.getItem("theme")) {
-      setTheme(e.matches ? "dark" : "light");
-    }
+    burger.addEventListener("click", () => {
+      if (isOpen) {
+        if (menu) menu.classList.remove("active");
+        isOpen = false;
+      } else {
+        if (menu) menu.classList.add("active");
+        isOpen = true;
+      }
+    });
+  }
+
+  if (close) {
+    const newClose = close.cloneNode(true);
+    close.parentNode.replaceChild(newClose, close);
+    close = newClose;
+
+    close.addEventListener("click", () => {
+      if (menu) menu.classList.remove("active");
+      isOpen = false;
+    });
+  }
+}
+
+// ============================================
+// ФУНКЦИИ SELECT
+// ============================================
+function initSelects() {
+  document.querySelectorAll(".style_select").forEach((select) => {
+    const container = select.parentElement;
+    const arrow = container.querySelector(".select_arrow");
+
+    if (!arrow) return;
+
+    // При клике - поворачиваем стрелку
+    select.addEventListener("click", () => {
+      setTimeout(() => {
+        arrow.classList.toggle("rotated");
+      }, 10);
+    });
+
+    // При потере фокуса - возвращаем стрелку
+    select.addEventListener("blur", () => {
+      arrow.classList.remove("rotated");
+    });
   });
+}
 
+// ============================================
+// КЛАСС UNIVERSAL SLIDER
+// ============================================
 class UniversalSlider {
   constructor(sliderElement) {
     this.slider = sliderElement;
@@ -244,57 +307,79 @@ class UniversalSlider {
   }
 }
 
-// Инициализация
-document.addEventListener("DOMContentLoaded", () => {
-  // Все слайдеры с классом .gallery
+// ============================================
+// ФУНКЦИЯ ПОЛНОЙ ИНИЦИАЛИЗАЦИИ
+// ============================================
+function initApp() {
+  // Инициализация кнопок темы
+  const toggleBtn = document.getElementById("toggleBtn");
+  const toggleBtnMobile = document.getElementById("toggleBtnMobile");
+
+  if (toggleBtn) {
+    const newToggleBtn = toggleBtn.cloneNode(true);
+    toggleBtn.parentNode.replaceChild(newToggleBtn, toggleBtn);
+    newToggleBtn.addEventListener("click", toggleTheme);
+  }
+
+  if (toggleBtnMobile) {
+    const newToggleBtnMobile = toggleBtnMobile.cloneNode(true);
+    toggleBtnMobile.parentNode.replaceChild(
+      newToggleBtnMobile,
+      toggleBtnMobile,
+    );
+    newToggleBtnMobile.addEventListener("click", toggleTheme);
+  }
+
+  // Инициализация темы
+  initTheme();
+
+  // Инициализация бургер-меню
+  initBurgerMenu();
+
+  // Инициализация selects
+  initSelects();
+
+  // Инициализация слайдеров
   document
     .querySelectorAll(".gallery")
     .forEach((gallery) => new UniversalSlider(gallery));
 
-  // Все слайдеры с классом .photos
   document
     .querySelectorAll(".photos")
     .forEach((photos) => new UniversalSlider(photos));
-});
 
-let isOpen = false;
-const burger = document.getElementById("burger");
-const menu = document.getElementById("sidebar");
-const close = document.getElementById("close");
+  // Слушаем изменение системной темы
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (e) => {
+      if (!localStorage.getItem("theme")) {
+        setTheme(e.matches ? "dark" : "light");
+      }
+    });
+}
 
-burger.addEventListener("click", () => {
-  if (isOpen) {
-    menu.classList.remove("active");
-    isOpen = false;
+// ============================================
+// ЗАПУСК ПРИЛОЖЕНИЯ
+// ============================================
+if (typeof document !== "undefined") {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initApp);
   } else {
-    menu.classList.add("active");
-    isOpen = true;
+    initApp();
   }
-});
+}
 
-close.addEventListener("click", () => {
-  menu.classList.remove("active");
-});
-
-document.querySelectorAll(".style_select").forEach((select) => {
-  const container = select.parentElement;
-  const arrow = container.querySelector(".select_arrow");
-  let isOpen = false;
-
-  if (!arrow) return;
-
-  select.addEventListener("mousedown", () => {
-    isOpen = !isOpen;
-    arrow.classList.toggle("rotated", isOpen);
-  });
-
-  select.addEventListener("blur", () => {
-    isOpen = false;
-    arrow.classList.remove("rotated");
-  });
-
-  select.addEventListener("change", () => {
-    isOpen = false;
-    arrow.classList.remove("rotated");
-  });
-});
+// ============================================
+// ЭКСПОРТ ДЛЯ ТЕСТИРОВАНИЯ
+// ============================================
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    setTheme,
+    toggleTheme,
+    initTheme,
+    UniversalSlider,
+    initBurgerMenu,
+    initSelects,
+    initApp,
+  };
+}

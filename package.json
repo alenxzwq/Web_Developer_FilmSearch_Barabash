@@ -1,0 +1,25 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "Проект: приложение для поиска фильмов\r    Имя Фамилия — Алёна Барабаш\r    Логин на GitHub — alenxzwq\r    E-mail — barabasaleonao7@gmail.com",
+  "main": "api.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alenxzwq/--------------------------.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/alenxzwq/--------------------------/issues"
+  },
+  "homepage": "https://github.com/alenxzwq/--------------------------#readme",
+  "devDependencies": {
+    "jest": "^30.4.2",
+    "jest-environment-jsdom": "^30.4.1"
+  }
+}

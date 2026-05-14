@@ -156,7 +156,7 @@ function createMovieCard(film) {
   `;
 
   card.addEventListener("click", () => {
-    const filmId = film.filmId || film.kinopoiskId;
+    const filmId = film.kinopoiskId || film.filmId;
     if (filmId) {
       window.location.href = `/movie/movie.html?id=${filmId}`;
     } else {
@@ -168,7 +168,38 @@ function createMovieCard(film) {
 }
 
 // ============================================
-// 5. ПАГИНАЦИЯ
+// 5. СЛАЙДЕР (новая функция)
+// ============================================
+
+async function loadMovies(containerSelector, type = "FILM", limit = 20) {
+  const container = document.querySelector(containerSelector);
+  if (!container) return;
+
+  showLoading(
+    container,
+    type === "SERIES" ? "Загрузка сериалов..." : "Загрузка фильмов...",
+  );
+
+  const items = await getContent(type);
+
+  if (!items || items.length === 0) {
+    showError(
+      container,
+      type === "SERIES"
+        ? "Не удалось загрузить сериалы"
+        : "Не удалось загрузить фильмы",
+    );
+    return;
+  }
+
+  container.innerHTML = "";
+  items.slice(0, limit).forEach((item) => {
+    container.appendChild(createMovieCard(item));
+  });
+}
+
+// ============================================
+// 6. ПАГИНАЦИЯ ДЛЯ СЕТКИ
 // ============================================
 
 function updatePaginationDisplay() {
@@ -215,34 +246,8 @@ function showCurrentPage() {
   updatePaginationDisplay();
 }
 
-async function loadMoviesWithPagination(containerSelector, type = "FILM") {
-  const container = document.querySelector(containerSelector);
-  if (!container) return;
-
-  showLoading(
-    container,
-    type === "SERIES" ? "Загрузка сериалов..." : "Загрузка фильмов...",
-  );
-
-  const items = await getContent(type);
-
-  if (!items || items.length === 0) {
-    showError(
-      container,
-      type === "SERIES"
-        ? "Не удалось загрузить сериалы"
-        : "Не удалось загрузить фильмы",
-    );
-    return;
-  }
-
-  currentMovieList = items;
-  currentPage = 1;
-  showCurrentPage();
-}
-
 // ============================================
-// 6. ПОИСК И ФИЛЬТРАЦИЯ
+// 7. ПОИСК И ФИЛЬТРАЦИЯ
 // ============================================
 
 async function performSearch(query, searchType = "MIXED") {
@@ -323,16 +328,18 @@ function setupSearch() {
 }
 
 // ============================================
-// 7. ФИЛЬТРЫ
+// 8. ФИЛЬТРЫ
 // ============================================
 
 function filterByYear(movies, year) {
+  if (!movies || !Array.isArray(movies)) return [];
   if (!year || year === "") return movies;
   const yearNum = parseInt(year);
   return movies.filter((movie) => parseInt(movie.year) === yearNum);
 }
 
 function filterByGenre(movies, genre) {
+  if (!movies || !Array.isArray(movies)) return [];
   if (!genre || genre === "") return movies;
   return movies.filter((movie) =>
     movie.genres?.some((g) => g.genre.toLowerCase() === genre.toLowerCase()),
@@ -340,6 +347,7 @@ function filterByGenre(movies, genre) {
 }
 
 function filterByCountry(movies, country) {
+  if (!movies || !Array.isArray(movies)) return [];
   if (!country || country === "") return movies;
   return movies.filter((movie) =>
     movie.countries?.some((c) =>
@@ -349,6 +357,7 @@ function filterByCountry(movies, country) {
 }
 
 function filterByRating(movies, minRating) {
+  if (!movies || !Array.isArray(movies)) return [];
   if (!minRating || minRating === "") return movies;
   return movies.filter((movie) => (movie.rating || 0) >= parseInt(minRating));
 }
@@ -358,14 +367,12 @@ function applyFilters() {
   const genre = document.getElementById("genreFilter")?.value;
   const country = document.getElementById("countryFilter")?.value;
   const rating = document.getElementById("ratingFilter")?.value;
-
-  // Исходные фильмы нужно откуда-то брать. Добавь глобальную переменную originalMovies обратно
-  if (typeof originalMovies === "undefined") {
+  if (typeof window.originalMovies === "undefined") {
     console.warn("originalMovies не определена");
     return;
   }
 
-  let filtered = [...originalMovies];
+  let filtered = [...window.originalMovies];
   filtered = filterByYear(filtered, year);
   filtered = filterByGenre(filtered, genre);
   filtered = filterByCountry(filtered, country);
@@ -403,7 +410,43 @@ function autoFilter() {
 }
 
 // ============================================
-// 8. СТРАНИЦА ФИЛЬМА (разбита на части)
+// 9. СЛУЧАЙНЫЕ ФИЛЬМЫ ДЛЯ СЕТКИ
+// ============================================
+
+async function loadRandomMovies(type = "FILM") {
+  const container = document.querySelector(".movies_grid");
+  if (!container) return;
+
+  showLoading(container, "Загрузка...");
+
+  let items = await getContent(type);
+
+  if (!items || items.length === 0) {
+    showError(container, "Ошибка загрузки");
+    return;
+  }
+
+  // Сохраняем оригинальные фильмы для фильтров
+  window.originalMovies = [...items];
+
+  // Перемешиваем
+  for (let i = items.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [items[i], items[j]] = [items[j], items[i]];
+  }
+
+  // Сортируем по рейтингу
+  items.sort(
+    (a, b) => (parseFloat(b.rating) || 0) - (parseFloat(a.rating) || 0),
+  );
+
+  currentMovieList = items.slice(0, 50);
+  currentPage = 1;
+  showCurrentPage();
+}
+
+// ============================================
+// 10. СТРАНИЦА ФИЛЬМА
 // ============================================
 
 async function loadFilmInfo(film, filmId) {
@@ -563,7 +606,7 @@ async function loadFilmImages(filmId) {
     } else {
       if (photosSection) photosSection.style.display = "block";
       photosTrack.innerHTML =
-        '<div class="no-content-message">📷 Кадры из фильма отсутствуют</div>';
+        '<div class="no-content-message">Кадры из фильма отсутствуют</div>';
       const prevBtn = document.querySelector(".photos-prev-btn");
       const nextBtn = document.querySelector(".photos-next-btn");
       if (prevBtn) prevBtn.style.display = "none";
@@ -687,43 +730,7 @@ async function loadFilmPage() {
 }
 
 // ============================================
-// 9. СЛУЧАЙНЫЕ ФИЛЬМЫ
-// ============================================
-
-async function loadRandomMovies(type = "FILM") {
-  const container = document.querySelector(".movies_grid");
-  if (!container) return;
-
-  showLoading(container, "Загрузка...");
-
-  let items = await getContent(type);
-
-  if (!items || items.length === 0) {
-    showError(container, "Ошибка загрузки");
-    return;
-  }
-
-  // Сохраняем оригинальные фильмы для фильтров
-  window.originalMovies = [...items];
-
-  // Перемешиваем
-  for (let i = items.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [items[i], items[j]] = [items[j], items[i]];
-  }
-
-  // Сортируем по рейтингу
-  items.sort(
-    (a, b) => (parseFloat(b.rating) || 0) - (parseFloat(a.rating) || 0),
-  );
-
-  currentMovieList = items.slice(0, 50);
-  currentPage = 1;
-  showCurrentPage();
-}
-
-// ============================================
-// 10. ОБРАБОТКА ПАРАМЕТРОВ ПОИСКА В URL
+// 11. ОБРАБОТКА ПАРАМЕТРОВ ПОИСКА В URL
 // ============================================
 
 function checkSearchParam() {
@@ -755,7 +762,7 @@ function checkSearchParam() {
 }
 
 // ============================================
-// 11. ИНИЦИАЛИЗАЦИЯ (ЗАВИСИТ ОТ СТРАНИЦЫ)
+// 12. ИНИЦИАЛИЗАЦИЯ (ЗАВИСИТ ОТ СТРАНИЦЫ)
 // ============================================
 
 const currentPath = window.location.pathname;
@@ -772,14 +779,46 @@ if (isMoviePage) {
   if (!hasSearch) {
     if (isSeriesPage) {
       loadRandomMovies("SERIES");
-      loadMoviesWithPagination(".slider_track", "SERIES");
+      loadMovies(".slider_track", "SERIES", 20);
     } else {
       loadRandomMovies("FILM");
-      loadMoviesWithPagination(".slider_track", "FILM");
+      loadMovies(".slider_track", "FILM", 20);
     }
   }
 
   // Запускаем обработчики
   setupSearch();
   autoFilter();
+}
+
+// ============================================
+// ЭКСПОРТ ДЛЯ ТЕСТИРОВАНИЯ
+// ============================================
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    // Утилиты
+    getRatingValue,
+    truncateText,
+    escapeHtml,
+    filterByType,
+    // Фильтры
+    filterByYear,
+    filterByGenre,
+    filterByCountry,
+    filterByRating,
+    applyFilters,
+    // API
+    getContent,
+    searchContent,
+    apiRequest,
+    // UI
+    createMovieCard,
+    // Пагинация
+    showCurrentPage,
+    updatePaginationDisplay,
+    // Поиск
+    performSearch,
+    checkSearchParam,
+  };
 }
