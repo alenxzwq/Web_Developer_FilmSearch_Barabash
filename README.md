@@ -58,6 +58,7 @@
         Использованные технологии: HTML5, CSS3, JavaScript (ES6+), Fetch API
 
         Используется api кинопоиска: https://kinopoiskapiunofficial.tech/
+        Ссылка на сайт (открывать в режиме инкогнито): http://barabag2.beget.tech/index.html
 
 
 
