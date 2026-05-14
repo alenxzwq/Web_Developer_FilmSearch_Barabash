@@ -3,7 +3,7 @@
 // Базовые настройки для работы с API Кинопоиска
 const API_CONFIG = {
   BASE_URL: "https://kinopoiskapiunofficial.tech/api",
-  API_KEY: "d90bf8d1-e283-426b-a2bf-e10ae8f6e6b8",
+  API_KEY: "83208d21-5ac5-47d5-9713-65a362bc9fc7",
 };
 
 // 2. ГЛОБАЛЬНОЕ СОСТОЯНИЕ ПРИЛОЖЕНИЯ
